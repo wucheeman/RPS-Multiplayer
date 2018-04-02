@@ -1,0 +1,48 @@
+TEST TEMPLATE - RPS Multiplayer
+
+d = deferred
+e = met by enhancement
+f = failed
+p = passed
+s = skipped
+w = waiting for further work
+
+Requirements
+============
+[] Uses both JQuery and Firebase
+[] Two players can play a game of Rock-Paper-Scissors
+[] Both players pick either `rock`, `paper` or `scissors`.
+[] Game indicates whose turn it is to make a choice
+[] After the players make their selection, the game gives result - a win for one or the other player or a tie.
+[] Game resets automatically for the next round after ~2 seconds
+[] Game tracks each player's wins and losses. Tracking ties is optional.
+[] Game supports chat between the two players
+[] Chat need not be persisted
+[] Player leaves by reloading page
+[] Game notifies other player via 'disconnect' message in chat
+[] Game removes departed player's data from database while retaining other player's data
+[] Incomplete sections have pseudocode describing what remains to be done
+
+Bonus
+=====
+None
+
+Functionality
+=============
+[] Game initializes globals correctly
+[] Game reinitializes globals correctly
+
+Display
+=======
+Page need not closely resemble demo video
+
+Cleanup
+=======
+[] HTML validates
+[] CSS validates
+[] JS delinted (stretch)
+
+GitHub Pages
+============
+[] Page performs on load as expected
+[] Page performs after reload as expected
