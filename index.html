@@ -9,16 +9,110 @@
   <title>Multiplayer RPS</title>
 </head>
 <body>
-  <!-- See the Bootstrap grid template in /snippets -->
-    <!-- Creates the Overall Grid -->
-    <div class="container">
-        <h1>Rock Paper Scissors!</h1>
+  <!-- Creates the Overall Grid -->
+  <div class="container bg-primary">
+
+    <!-- Row 1 -->
+    <div class="row">
+      <div class="col-sm-12 bg-success text-center">
+        <h1>Rock Paper Scissors</h1>
+      </div>
+    </div> <!-- end of row -->
+
+    <!-- Row 2 -->
+    <div class="row mt-3 mb-5">
+      <div class="col-sm-4 ">
+      </div>
+      <div class="col-sm-4">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" id='player_name' placeholder="Name">
+          <div class="input-group-append">
+            <button class="btn.btn-square btn-success ml-2" id='player_start' type="button">Start</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4 ">
+      </div>
+    </div> <!-- end of row -->
+
+    <!-- Row 3 -->
+    <div class="row mb-5">
+      <div class="col-sm-3  border border-dark">
+        <div  class='text-center' id="first_player_info">
+          <h5>Waiting for Player 1</h5>
+          <!-- TODO: replace this kludge -->
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <h6>Wins: <span id='p_1_wins'></span>Losses: <span id='p_1_losses'></span></h6>
+        </div>
+      </div>
+      <div class="col-sm-1  ">
+      </div>
+      <div class="col-sm-4  border border-dark">
+        <h2 id="outcome_info"></p>
+      </div>
+      <div class="col-sm-1  ">
+      </div>
+      <div class="col-sm-3  border border-dark">
+        <div class='text-center' id="second_player_info">
+          <h5>Waiting for Player 2</h5>
+          <!-- TODO: replace this kludge -->
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <h6>Wins: <span id='p_1_wins'></span>Losses: <span id='p_1_losses'></span></h6>
+        </div>
+      </div>
+    </div> <!-- end of row -->
+
+    <!-- Row 4 -->
+    <div class="row mb-5">
+      <div class="col-sm-2 ">
+      </div>
+      <div class="col-sm-8 border border-dark bg-light">
+        <row>
+          <div class="col-sm-12 ">
+            <p>Chat goes here</p>
+            <!-- TODO: replace this kludge -->
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+          </div>
+        </row>
+        <row>
+          <div class="col-sm-12">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" id='player_name' placeholder="Name">
+              <div class="input-group-append">
+                <button class="btn.btn-square btn-success ml-2" id='player_start' type="button">Start</button>
+              </div>
+            </div>
+          </div>
+        </row>
+      </div>
+      <div class="col-sm-2 ">
+      </div>
+    </div> <!-- end of row -->
+
+    <!-- Row 5 -->
+    <div class="row">
+      <div class="col-sm-12">
+        <!-- TODO: replace this kludge -->
+        <br>
+        <br>
+        <br>
+      </div>
+    </div> <!-- end of row -->
 
 
-
-
-
-    </div><!-- end of container-->
+  </div><!-- end of container-->
   
     <script src='https://www.gstatic.com/firebasejs/live/3.0/firebase.js'></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
