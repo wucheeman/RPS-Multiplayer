@@ -41,64 +41,141 @@ const dbInterface = {
 // TODO
 const playerManagement = {
   // provides functionality for players to join and leave the game
+  enterGame: function(player) {
+    // gets player set up and ready to play game
+    // TODO
+  },
+  leaveGame: function (player) {
+    // initialize that player's data;
+    // sends disconnect message in chat
+    // TODO
+  }
 }
 
 // TODO
 const rps = {
   // provides functionality for play of the game
-  player_1_wins: ['p1', 0],
-  player_1_losses: ['p1', 0],
-  player_2_wins: ['p2', 0],
-  player_2_losses: ['p2', 0],
-  tie_games: 0,
+  // TODO: settle on best representaton of these data
+  wins: [0, 0],
+  losses: [0, 0],
+  tieGames: 0,
+  choices: ['rock', 'paper', 'scissors'],
+  p1Choice: '',
+  p2Choice: '',
   // TODO: add further properties
   initializeP1Data: function() {
     // TODO: refactor/simplify?
-    this.player_1_wins[1] = 0;
-    this.player_1_losses[1] = 0;
+    this.wins[0] = 0;
+    this.losses[0] = 0;
+    this.p1Choice = '';
   },
   initializeP2Data: function() {
     // TODO: refactor/simplify?
-    this.player_2_wins[1] = 0;
-    this.player_2_losses[1] = 0;
+    this.wins[1] = 0;
+    this.losses[1] = 0;
+    this.p2Choice = '';
   },
   initializeGameData: function() {
     console.log('in rps.initializeGameData()')
     // initializes both player's data
     this.initializeP1Data();
     this.initializeP2Data();
-    this.tie_games = 0;
+    this.tieGames = 0;
   },
   incrementPlayerWins: function(player) {
-    // TODO increment player's wins
+    // increment player's wins
+    if (player === 'p1') {
+      this.wins[0]++;
+      console.log('player 1 has won: ' + this.wins[0]);
+    } else {
+      this.wins[1]++;
+      console.log('player 2 has won: ' + this.wins[0]);
+    }
   },
   incrementPlayerLosses: function(player) {
-    // TODO increment player's losses
+    // increment player's losses
+    if (player === 'p1') {
+      this.losses[0]++;
+      console.log('player 1 has lost: ' + this.losses[0]);
+    } else {
+      this.wins[1]++;
+      console.log('player 2 has lost: ' + this.losses[0]);
+    }
+  },
+  incrementTies: function() {
+    this.tieGames++;
   },
   getPlayerWins: function(player) {
-    // TODO get player's wins
+    // gets player's wins
+    if (player === 'p1') {
+      return this.wins[0];
+    } else {
+      return this.wins[1];
+    }
   },
   getPlayerLosses: function(player) {
     // TODO get player's losses
   },
+  getTieGames: function() {
+    return this.tieGames;
+  },
   displayPlayerChoices: function() {
     // TODO builds rock paper scissors choice and sends to render
   },
-  getPlayerChoice: function() {
+  getPlayerChoice: function(player) {
     // TODO gets player's choice - rock, paper, scissors
     // and sends to DB
   },
   sendPlayerChoice: function() {
     // TODO sends player's choice to DB
   },
-  retrievePlayerChoice: function() {
-    // TODO: gets other player's choice from the DB
-  },
-  determineOutcome: function() {
-    // TODO: compares player choices and decides who won
+  retrievePlayerChoice: function(player) {
+    // gets other player's choice from the DB
+    // TODO: current dummy functionality
+    if (player === 'p1') {
+      return this.p1Choice;
+    } else {
+      return this.p2Choice;
+    }
   },
   playRound: function() {
-    // TODO: drives play of a round of RPS
+    // drives play of a round of RPS
+    // TODO: need some trigger to set this off
+    const p1Choice = this.retrievePlayerChoice('p1');
+    //console.log('In playRound, p1Choice is ' + p1Choice);
+    const p2Choice = this.retrievePlayerChoice('p2');
+    //console.log('in playRound, p2Choice is ' + p2Choice);
+    if ((p1Choice === "rock") && (p2Choice === "scissors")) {
+        console.log('p1 wins!');
+        this.incrementPlayerWins('p1');
+        this.incrementPlayerLosses('p2');
+    } else if ((p1Choice === "rock") && (p2Choice === "paper")) {
+        console.log('p2 wins!');
+        this.incrementPlayerWins('p2');
+        this.incrementPlayerLosses('p1');
+
+    } else if ((p1Choice === "scissors") && (p2Choice === "rock")) {
+        console.log('p2 wins!');
+        this.incrementPlayerWins('p2');
+        this.incrementPlayerLosses('p1');
+    } else if ((p1Choice === "scissors") && (p2Choice === "paper")) {
+        console.log('p1 wins!');
+        this.incrementPlayerWins('p1');
+        this.incrementPlayerLosses('p2');
+
+    } else if ((p1Choice === "paper") && (p2Choice === "rock")) {
+        console.log('p1 wins!');
+        this.incrementPlayerWins('p1');
+        this.incrementPlayerLosses('p2');
+    } else if ((p1Choice === "paper") && (p2Choice === "scissors")) {
+        console.log('p2 wins!');
+        this.incrementPlayerWins('p2');
+        this.incrementPlayerLosses('p1');
+
+    } else if (p1Choice === p2Choice) {
+        console.log('it is a tie!');
+        this.incrementTies();
+    }
   }
 
   // TODO: add methods to play rps
@@ -137,7 +214,7 @@ const render = (message, location, action) => {
 // GAME
 //===============================================================
 $(document).ready(function() {
-  console.log('starting');
+  console.log('starting app.js');
   initializeGlobals();
   initializeDisplay();
   main();

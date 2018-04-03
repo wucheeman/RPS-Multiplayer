@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link href="../assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+  <title>Unit Test RPS</title>
+</head>
+<body>
+  <!-- Creates the Overall Grid -->
+  <div class="container bg-primary">
+
+    <!-- Row 1 -->
+    <div class="row">
+      <div class="col-sm-12 bg-success text-center">
+        <h1>Unit Test for Rock Paper Scissors</h1>
+      </div>
+    </div> <!-- end of row -->
+
+  </div>
+  
+    <script src='https://www.gstatic.com/firebasejs/live/3.0/firebase.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="../assets/javascript/app.js"></script>
+    <script>
+      // experimenting with crude unit tests
+
+      function testWinLoseCounters () {
+        console.log('testing incrementPlayerWins');
+        rps.incrementPlayerWins('p1');
+        rps.incrementPlayerWins('p2');
+        rps.incrementPlayerWins('p1');
+        rps.incrementPlayerWins('p1');
+        console.log('testing incrementPlayerLosses');
+        rps.incrementPlayerLosses('p1');
+        rps.incrementPlayerLosses('p2');
+        rps.incrementPlayerLosses('p1');
+        rps.incrementPlayerLosses('p1');
+        console.log('testing getPlayerWins');
+        console.log('p1 has won: ' + rps.getPlayerWins('p1'));
+        console.log('p2 has won: ' + rps.getPlayerWins('p2'));
+      }
+
+      function testInitializePlayerData() {
+        console.log('testing initializePxData')
+        console.log('Setting win/loss data directly')
+        rps.wins = [5, 2],
+        rps.losses= [4, 2],
+        console.log('p1 has won: ' + rps.getPlayerWins('p1'));
+        console.log('p2 has won: ' + rps.getPlayerWins('p2'))
+        rps.initializeP1Data();
+        rps.initializeP2Data();
+        console.log('player win data should be 0 now');
+        console.log('p1 has won: ' + rps.getPlayerWins('p1'));
+        console.log('p2 has won: ' + rps.getPlayerWins('p2'));
+      }
+
+      function testInitializeGameData() {
+        console.log('testing initializeGameData');
+        console.log('Setting win/loss data directly');
+        rps.wins = [15, 12];
+        rps.losses= [4, 8];
+        rps.tieGames = 7;
+        console.log('p1 has won: ' + rps.getPlayerWins('p1'));
+        console.log('p2 has won: ' + rps.getPlayerWins('p2'));
+        console.log('incremented ties to: ' + rps.getTieGames());
+        console.log('running initializeGameData; data should be 0 now');
+        rps.initializeGameData();
+        console.log('p1 has won: ' + rps.getPlayerWins('p1'));
+        console.log('p2 has won: ' + rps.getPlayerWins('p2'));
+        console.log('incremented ties to: ' + rps.getTieGames());
+      }
+
+      function testIncrementTies() {
+        rps.incrementTies();
+        rps.incrementTies();
+        rps.incrementTies();
+        console.log('Should be 3 tie games');
+        console.log('getTieGames says there are ' + rps.getTieGames() + ' games');
+      }
+
+      function testPlayRound() {
+        console.log('testing rps.playRound');
+        console.log('initializing data');
+        rps.initializeGameData();
+        rps.p1Choice = 'rock'
+        rps.p2Choice = 'scissors'
+        console.log('t1: p1 should win');
+        rps.playRound();
+        rps.p1Choice = 'rock'
+        rps.p2Choice = 'paper'
+        console.log('t2: p2 should win');
+        rps.playRound();
+        rps.p1Choice = 'rock'
+        rps.p2Choice = 'rock'
+        console.log('t3: should tie');
+
+        rps.playRound();
+        rps.p1Choice = 'scissors'
+        rps.p2Choice = 'rock'
+        console.log('t4: p2 should win');
+        rps.playRound();
+        rps.p1Choice = 'scissors'
+        rps.p2Choice = 'paper'
+        console.log('t5: p1 should win');
+        rps.playRound();
+        rps.p1Choice = 'scissors'
+        rps.p2Choice = 'scissors'
+        console.log('t6: should tie');
+
+        rps.playRound();
+        rps.p1Choice = 'paper'
+        rps.p2Choice = 'rock'
+        console.log('t7: p1 should win');
+        rps.playRound();
+        rps.p1Choice = 'paper'
+        rps.p2Choice = 'scissors'
+        console.log('t8: p2 should win');
+        rps.playRound();
+        rps.p1Choice = 'scissors'
+        rps.p2Choice = 'scissors'
+        console.log('t9: should tie');
+        rps.playRound();
+
+      }
+
+      console.log('starting unit test');
+      // testInitializeGameData()
+      // testWinLoseCounters ()
+      // console.log('initializing data');
+      // rps.initializeGameData();
+      // testInitializePlayerData();
+      // console.log('initializing data');
+      // rps.initializeGameData();
+      // testIncrementTies();
+      // console.log('initializing data');
+      // rps.initializeGameData();
+      testPlayRound()
+
+      console.log('*** DONE WITH UNIT TEST ***')
+
+    
+    
+    
+    
+    
+    
+    </script>
+</body>
+</html>

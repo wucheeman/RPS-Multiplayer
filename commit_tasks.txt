@@ -1,6 +1,7 @@
 [x] initial files
 [x] first rough cut html
-[] first-pass pseudocode
+[x] first-pass pseudocode
+[-] fill in rps object's functionality
 
 
 [] beautify page as time permits
