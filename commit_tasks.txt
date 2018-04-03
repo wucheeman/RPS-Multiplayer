@@ -7,6 +7,8 @@
    (x) first player's screen updated
    (x) player clicks registered
 [] rough in storing game data in Firebase
+   (x) app initializes Firebase dB
+
 [] update screen so second player can enter choice
    () player's screen updated
    () player clicks registered

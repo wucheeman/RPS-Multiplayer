@@ -19,10 +19,21 @@ const chatInterface = {
 // TODO
 const dbInterface = {
   // provides single interface to Firebase and localStorage
+  // currently only supports Firebase
   firebaseInUse: true,
   initializeDB: function () {
     // initializes database at start of game
     console.log('in dbInterface.initializeDB()');
+    const config = {
+      apiKey: "AIzaSyCO8AKA-sBxzIiQ5kO9P5NGYQbfOBkqpSY",
+      authDomain: "rpsmultiplayer-b292e.firebaseapp.com",
+      databaseURL: "https://rpsmultiplayer-b292e.firebaseio.com",
+      projectId: "rpsmultiplayer-b292e",
+      storageBucket: "rpsmultiplayer-b292e.appspot.com",
+      messagingSenderId: "1035200309195"
+    };
+    firebase.initializeApp(config);
+    console.log('done initializing Firebase')
   },
   getDataElement: function(key) {
     // if firebaseInUse is true, get from Firebase
