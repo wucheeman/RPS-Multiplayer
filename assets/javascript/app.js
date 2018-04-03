@@ -200,7 +200,10 @@ const rps = {
     console.log('in rps.startPlay()');
     console.log('triggering setup of buttons now');
     // TODO: this may need to move to playRound
-    let message = makePlayerControls(managePlayers.playerOneName);
+    let message = makePlayerControls(managePlayers.playerOneName,  
+                                     "p1",
+                                     this.wins[0],
+                                     this.losses[0]);
     render(message, '#first_player_info', 'empty');
   }
 
