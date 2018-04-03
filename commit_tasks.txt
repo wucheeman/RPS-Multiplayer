@@ -1,3 +1,9 @@
-[] initial files
-[] rough cut html
+[x] initial files
+[x] first rough cut html
 [] first-pass pseudocode
+
+
+[] beautify page as time permits
+  () improve background colors
+  () improve fonts and font-sizes
+  () improve responsiveness - widths, heights
