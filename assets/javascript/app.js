@@ -21,6 +21,7 @@ const dbInterface = {
   // provides single interface to Firebase and localStorage
   // currently only supports Firebase
   firebaseInUse: true,
+  database: '',
   initializeDB: function () {
     // initializes database at start of game
     console.log('in dbInterface.initializeDB()');
@@ -33,6 +34,7 @@ const dbInterface = {
       messagingSenderId: "1035200309195"
     };
     firebase.initializeApp(config);
+    this.database = firebase.database();
     console.log('done initializing Firebase')
   },
   getDataElement: function(key) {
@@ -40,12 +42,24 @@ const dbInterface = {
     // else get from localStorage
     // and return it
     console.log('in rps.getDataElement()');
+    // this retrieves data initially and whenever it changes
+    // TODO: determine how to use this beyond simply displaying it
+    this.database.ref().on("value", function(snapshot) {
+      console.log('logging snapshot.val().key: ' + snapshot.val().key);
+    }, function(errorObject) {
+      console.log("The read failed: " + errorObject.code);
+    });
   },
   setDataElement: function(key, value) {
     /// if firebaseInUse is true, write data to Firebase
     // else write it to localStorage
     // return outcome
     console.log('in rps.setDataElement()');
+    // Note how we are using the Firebase .set() method
+      this.database.ref().set({
+        key: value
+      });
+    console.log('set a value in the DB');
   }
 }
 
@@ -153,10 +167,11 @@ const rps = {
   // displayPlayerChoices: function() {
   //   // TODO builds rock paper scissors choice and sends to render
   // },
-  getPlayerChoice: function(player) {
-    // TODO gets player's choice - rock, paper, scissors
-    // and sends to DB
-  },
+  // TODO: on.click takes care of this: delete
+  // getPlayerChoice: function(player) {
+  //   // TODO gets player's choice - rock, paper, scissors
+  //   // and sends to DB
+  // },
   sendPlayerChoice: function(choice) {
     // sends player's choice to DB
     console.log('in sendPlayerChoice');
@@ -166,7 +181,9 @@ const rps = {
     // gets other player's choice from the DB
     // TODO: current dummy functionality
     if (player === 'p1') {
-      return this.p1Choice;
+      // return this.p1Choice;
+      const testVar = dbInterface.getDataElement('p1Choice');
+      console.log('retrieved p1s choice from DB: ' + testVar);  
     } else {
       return this.p2Choice;
     }
@@ -219,6 +236,7 @@ const rps = {
                                      this.wins[0],
                                      this.losses[0]);
     render(message, '#first_player_info', 'empty');
+    console.log('pinging the DB: ' + rps.retrievePlayerChoice("p1"));
   }
 
   // TODO: continue adding methods as needed

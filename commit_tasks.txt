@@ -8,6 +8,10 @@
    (x) player clicks registered
 [] rough in storing game data in Firebase
    (x) app initializes Firebase dB
+   (x) app stores player's choice in DB
+   () fix bug - initialization clears data from dB
+   () app retrieves data from dB
+   () app watches dB updates in realtime
 
 [] update screen so second player can enter choice
    () player's screen updated
