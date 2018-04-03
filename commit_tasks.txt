@@ -2,6 +2,11 @@
 [x] first rough cut html
 [x] first-pass pseudocode
 [-] fill in rps object's functionality
+[x] rough in adding players
+[] update screen so play can begin
+[] rough in storing game data in Firebase
+[] when player is added, update that player's screen per target
+
 
 
 [] beautify page as time permits

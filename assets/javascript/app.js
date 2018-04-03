@@ -39,11 +39,30 @@ const dbInterface = {
 }
 
 // TODO
-const playerManagement = {
+const managePlayers = {
   // provides functionality for players to join and leave the game
-  enterGame: function(player) {
+  playerOneName: '',
+  playerTwoName: '',
+  addPlayer: function(playerName) {
+    console.log('in managePlayers.addPlayer')
+    if (this.playerOneName) {
+      this.playerTwoName = playerName;
+      console.log('playerTwoName is: ' + this.playerTwoName);
+    } else {
+      this.playerOneName = playerName;
+      console.log('playerOneName is: ' + this.playerOneName);
+    }
+  },
+  enterGame: function(playerName) {
     // gets player set up and ready to play game
-    // TODO
+    this.addPlayer(playerName);
+    if (this.playerOneName && this.playerTwoName) {
+      console.log('two players present - start play');
+      rps.startPlay();
+    } else {
+      console.log('only one player present - wait');
+    }
+
   },
   leaveGame: function (player) {
     // initialize that player's data;
@@ -176,9 +195,13 @@ const rps = {
         console.log('it is a tie!');
         this.incrementTies();
     }
+  },
+  startPlay: function() {
+    console.log('in rps.startPlay()');
+    console.log('need to trigger setup of buttons now');
   }
 
-  // TODO: add methods to play rps
+  // TODO: continue adding methods as needed
 
 } // end of rps definition
 
@@ -186,6 +209,35 @@ const rps = {
 //===============================================================
 
 // TODO
+
+const clickHandler = (e) => {
+  const clickTarget = e.target.className;
+  switch (clickTarget) {
+    case 'btn.btn-square btn-success ml-2 addPlayer':
+      console.log('clicked on start button');
+      e.defaultPrevented;
+      const newPlayer = $('#player_name').val();
+      console.log('calling managePlayers.enterGame');
+      // TODO: move to render()
+      $('#player_name').val('');
+      managePlayers.enterGame(newPlayer);
+      break;
+    // case 'not coded yet' :
+    //     code to be executed if <variable> has <value 2>
+    //     break;
+    // case <value 3> :
+    //     code to be executed if <variable> has <value 3>
+    //     break;
+    // //...
+    // case <value n> :
+    //     code to be executed if <variable> has <value n>
+    //     break;
+    // //...
+    default:
+      console.log('user clicked in unsupported region');
+  }
+}
+
 const initializeGlobals = () => {
   // initializes global variables... if any
   console.log('in initializeGlobals');
@@ -201,15 +253,24 @@ const initializeDisplay = () => {
 const main = () => {
   // provides main game functionality
   console.log('in main()');
+  $(document).on('click', clickHandler);
 }
 
 const render = (message, location, action) => {
-  // intended to be sole interface to HTML page
+  // intended to be sole interface to HTML page.
+  // updates screen at location with contents of imgElements after taking
+  // the action, if one is specified;
   // writes message to location after taking action (if any)
   console.log('in render()');
+  // currently, only supports emptying the location
+  if (action) {
+      $(location).empty();
+  }
+  // TODO: this may need update
+  for (var i = 0; i < message.length; i++) {
+     $(location).append(message[i]);
+  }
 }
-
-
 
 // GAME
 //===============================================================
@@ -218,5 +279,4 @@ $(document).ready(function() {
   initializeGlobals();
   initializeDisplay();
   main();
-})
-
+});
