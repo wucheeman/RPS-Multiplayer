@@ -138,15 +138,18 @@ const rps = {
   getTieGames: function() {
     return this.tieGames;
   },
-  displayPlayerChoices: function() {
-    // TODO builds rock paper scissors choice and sends to render
-  },
+  // TODO: delete
+  // displayPlayerChoices: function() {
+  //   // TODO builds rock paper scissors choice and sends to render
+  // },
   getPlayerChoice: function(player) {
     // TODO gets player's choice - rock, paper, scissors
     // and sends to DB
   },
-  sendPlayerChoice: function() {
-    // TODO sends player's choice to DB
+  sendPlayerChoice: function(choice) {
+    // sends player's choice to DB
+    console.log('in sendPlayerChoice');
+    // TODO: build this
   },
   retrievePlayerChoice: function(player) {
     // gets other player's choice from the DB
@@ -228,9 +231,19 @@ const clickHandler = (e) => {
       $('#player_name').val('');
       managePlayers.enterGame(newPlayer);
       break;
-    // case 'not coded yet' :
-    //     code to be executed if <variable> has <value 2>
-    //     break;
+    // TODO: enhance to cover both players?
+    case 'rock p1' :
+      console.log('p1 chose rock');
+      dbInterface.setDataElement('p1Choice', 'rock');
+      break;
+    case 'paper p1':
+    console.log('p1 chose paper');
+      dbInterface.setDataElement('p1Choice', 'paper');
+      break;
+    case 'scissors p1':
+      console.log('p1 chose scissors');
+      dbInterface.setDataElement('p1Choice', 'scissors');
+      break;
     // case <value 3> :
     //     code to be executed if <variable> has <value 3>
     //     break;

@@ -3,11 +3,13 @@
 [x] first-pass pseudocode
 [-] fill in rps object's functionality
 [x] rough in adding players
-[] update screen so play can begin
+[x] update screen so play can begin
    (x) first player's screen updated
-   () player clicks registered
+   (x) player clicks registered
 [] rough in storing game data in Firebase
 [] update screen so second player can enter choice
+   () player's screen updated
+   () player clicks registered
 [] welcome player when player is added per target
 
 
