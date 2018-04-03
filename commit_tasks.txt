@@ -4,8 +4,11 @@
 [-] fill in rps object's functionality
 [x] rough in adding players
 [] update screen so play can begin
+   (x) first player's screen updated
+   () player clicks registered
 [] rough in storing game data in Firebase
-[] when player is added, update that player's screen per target
+[] update screen so second player can enter choice
+[] welcome player when player is added per target
 
 
 

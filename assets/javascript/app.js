@@ -198,7 +198,10 @@ const rps = {
   },
   startPlay: function() {
     console.log('in rps.startPlay()');
-    console.log('need to trigger setup of buttons now');
+    console.log('triggering setup of buttons now');
+    // TODO: this may need to move to playRound
+    let message = makePlayerControls(managePlayers.playerOneName);
+    render(message, '#first_player_info', 'empty');
   }
 
   // TODO: continue adding methods as needed
@@ -267,9 +270,7 @@ const render = (message, location, action) => {
       $(location).empty();
   }
   // TODO: this may need update
-  for (var i = 0; i < message.length; i++) {
-     $(location).append(message[i]);
-  }
+  $(location).append(message);
 }
 
 // GAME
