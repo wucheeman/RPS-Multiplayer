@@ -1,6 +1,18 @@
 // buildHTML.js
 // builds dynamic HTML for Multiplayer RPS
 
+const makeNameInputForm = () => {
+  const message = `
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" id='player_name' placeholder="Name">
+      <div class="input-group-append">
+        <button class="btn.btn-square btn-success ml-2 addPlayer" id='player_start' type="button">Start</button>
+      </div>
+    </div>
+  `
+  return message
+}
+
 const makePlayerControls = (playerName, playerID, playerWins, playerLosses) => {
   // builds and won/loss display for a player
   console.log('in buildHTmL makePlayerControls')
@@ -13,5 +25,38 @@ const makePlayerControls = (playerName, playerID, playerWins, playerLosses) => {
     <hr>
     <h6><span class='wins'>Wins: ${playerWins}</span><span class='losses'>   Losses: ${playerLosses}</span></h6> 
   `
+  return message;
+}
+
+// TODO (future): make this DRY
+const makeInitialPlayerControls = (playerName, playerID) => {
+  // builds initial control-area display for a player
+  console.log('in buildHTmL makeInitialPlayerControls')
+  const message = `
+    <h4> ${playerName} </h4>
+    <hr>
+    <br>
+    <br>
+    <br>
+    <hr>
+    <h6><span class='wins'>Wins: 0</span><span class='losses'>   Losses: 0</span></h6> 
+  `
+  return message;
+}
+
+const welcomePlayer = (playerName, playerID) => {
+  // builds welcome display for a player
+  console.log('in buildHTmL welcomePlayer')
+  let message = '';
+  if (playerID === 'p1') {
+    message = `
+      <h5>Welcome, ${playerName}! You are Player 1</h5>
+    `
+    // TODO: remove once player 2 is supported
+    return message;
+  } else {
+    console.log('player 2 not yet supported')
+  }
+  // TODO: use once player 2 is supported
   return message;
 }

@@ -9,18 +9,32 @@
 [] rough in storing game data in Firebase
    (x) app initializes Firebase dB
    (x) app stores player's choice in DB
-   () fix bug - initialization clears data from dB
+
+REVIEW CODERS BAY, DO-MORE-PROPERTIES, AND ADD_CHILD (very important!)
+
+   () fix bug - initialization should clear data from dB and does not
+   () fix bug: stores single value; as key? cannot store multiple values
    () app retrieves data from dB
    () app watches dB updates in realtime
 
-[] update screen so second player can enter choice
-   () player's screen updated
+[x] welcome player when player is added per target
+[] screen outlines control area to tell first player she can enter choice (defer to beautification time?)
+[]  screen updates to indicate second player can enter choice
+   () player's screen updated to indicate turn (defer to beautification time?
+   () player's screen displays choices
    () player clicks registered
-[] welcome player when player is added per target
+[] After the players make their selection, the game gives result - a win for one or the other player or a tie.
+[] Game resets automatically for the next round after ~2 seconds
+[] Game tracks each player's wins and losses. Tracking ties is optional.
 
-
-
+[] Game supports chat between the two players
+[] Chat need not be persisted
+[] Player leaves by reloading page
+[] Game notifies other player via 'disconnect' message in chat
+[] Game removes departed player's data from database while retaining other player's data
+[] If necessary at submission time, incomplete sections have pseudocode describing what remains to be done
 [] beautify page as time permits
   () improve background colors
   () improve fonts and font-sizes
   () improve responsiveness - widths, heights
+  () replace top row with hero bar

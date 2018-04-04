@@ -35,13 +35,17 @@ const dbInterface = {
     };
     firebase.initializeApp(config);
     this.database = firebase.database();
-    console.log('done initializing Firebase')
+    // TODO: under construction; un comment when ready to go
+    //this.removeExistingData();
+    console.log('done initializing Firebase');
   },
+  // TODO: under construction; un comment when ready to go
+  // removeExistingData: function() {
+  //   this.database.remove()
+  // },
   getDataElement: function(key) {
-    // if firebaseInUse is true, get from Firebase
-    // else get from localStorage
-    // and return it
-    console.log('in rps.getDataElement()');
+    // if firebaseInUse is true, get from Firebase, else get from localStorage
+    console.log('in dbInterface.getDataElement()');
     // this retrieves data initially and whenever it changes
     // TODO: determine how to use this beyond simply displaying it
     this.database.ref().on("value", function(snapshot) {
@@ -54,7 +58,7 @@ const dbInterface = {
     /// if firebaseInUse is true, write data to Firebase
     // else write it to localStorage
     // return outcome
-    console.log('in rps.setDataElement()');
+    console.log('in dbInterface.setDataElement()');
     // Note how we are using the Firebase .set() method
       this.database.ref().set({
         key: value
@@ -70,11 +74,21 @@ const managePlayers = {
   playerTwoName: '',
   addPlayer: function(playerName) {
     console.log('in managePlayers.addPlayer')
+    let message = '';
     if (this.playerOneName) {
       this.playerTwoName = playerName;
       console.log('playerTwoName is: ' + this.playerTwoName);
     } else {
       this.playerOneName = playerName;
+      message = welcomePlayer(this.playerOneName, 'p1');
+      render(message, '#nameLand', 'empty');
+      console.log('replacing welcome with name form');
+      setTimeout(() => {
+          render(makeNameInputForm(), '#nameLand', 'empty');
+        }, 2000);
+      // set timeout 
+      message = makeInitialPlayerControls(this.playerOneName, 'p1');
+      render(message, '#first_player_info', 'empty');
       console.log('playerOneName is: ' + this.playerOneName);
     }
   },
@@ -87,7 +101,6 @@ const managePlayers = {
     } else {
       console.log('only one player present - wait');
     }
-
   },
   leaveGame: function (player) {
     // initialize that player's data;
