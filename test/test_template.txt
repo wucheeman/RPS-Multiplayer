@@ -31,6 +31,9 @@ Functionality
 =============
 [] Game initializes globals correctly
 [] Game reinitializes globals correctly
+[] Game initializes DB correctly
+[] Game initializes DB correctly
+[] Unit tests complete as expected
 
 Display
 =======
