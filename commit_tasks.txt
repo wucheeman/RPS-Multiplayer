@@ -7,7 +7,7 @@
    (x) first player's screen updated
    (x) player clicks registered
 [x] welcome player when player is added per target
-[] Store game data in Firebase
+[x] Store game data in Firebase
    (x) app initializes Firebase dB
    (x) app stores player's choice in DB
    (x) update to fix bug - initialization should clear data from dB and does not (see DB-experiments)
@@ -16,7 +16,7 @@
       <x> choice
       <x> wins
       <x> losses
-   () update to zero one player's info
+   (x) update to zero one player's info
 [] Game updates db for player one's information on entry
 []  screen updates to indicate second player can enter choice
    () player's screen displays choices

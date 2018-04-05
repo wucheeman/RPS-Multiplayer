@@ -37,7 +37,6 @@ const dbInterface = {
     this.database = firebase.database();
     // zeros data in DB
     // TODO: not DRY, but calling external method breaks game, so leaving for now
-    // TODO: uncomment when unit test runs clean
     this.database.ref().set({
       p1: {
         name: '',
@@ -65,18 +64,21 @@ const dbInterface = {
     });
   },
   setDataElement: function(player, key, value) {
-    /// if firebaseInUse is true, write data to Firebase else write to localStorage
-    // return outcome
+    // if firebaseInUse is true, write data to Firebase else write to localStorage
     console.log('in dbInterface.setDataElement()');
-    // // NB .set() overwrites what was there!!!
-    //   this.database.ref().set({
-    //     key: value
-    //   });
-    // updates single value of key/value pair
     console.log(player, key, value);
     // NOTE the [] around the 'key' variable!
     this.database.ref().child(player).update({[key]: value});
     console.log('set a value in the DB');
+  },
+  zeroPlayerData: function(player) {
+    console.log('in zeroPlayerData');
+    this.database.ref().child(player).update({
+        name: '',
+        wins: 0,
+        losses: 0,
+        choice: '' 
+    });
   }
 }
 
