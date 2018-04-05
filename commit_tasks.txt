@@ -26,7 +26,7 @@
    (x) player one's screen controls removed
    () fix bug: after p1 screen empties, name shows as undefined. Prob need to start reading the DB! <== RESUME
 
-   () player two clicks registered
+   () player two clicks are registered
 [] After second player makes choice, the game determines/announces result and updates counters in DB.
 [] Game resets automatically for the next round after ~2 seconds
 [] Players win/loss display updates after each round
@@ -34,11 +34,12 @@
 [] Game supports chat between the two players
 [] Chat need not be persisted
 [] Player leaves by reloading page
-SEE MATERIAL on presennce - exercises 07/15 and /16
+SEE MATERIAL on presence - exercises 07/15 and /16
 [] Game notifies other player via 'disconnect' message in chat
 [] Game removes departed player's data from database while retaining other player's data
 [] If necessary at submission time, incomplete sections have pseudocode describing what remains to be done
 [] Fix bug; game accepts empty string as player name
+[] Fix bug: name entry form appears when there are two players already
 [] beautify page as time permits
   () improve background colors
   () improve fonts and font-sizes

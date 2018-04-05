@@ -40,6 +40,7 @@ Functionality
 Display
 =======
 Page need not closely resemble demo video
+[] name entry form does not appear when there are two players already
 
 Cleanup
 =======
