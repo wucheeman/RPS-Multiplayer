@@ -18,7 +18,7 @@
       <x> losses
    (x) update to zero one player's info
 [x] Game updates db for player one's name on entry
-[] Game updates dB for first player's choice
+[x] Game updates dB for each player's choice
 []  screen updates to indicate second player can enter choice
    () player's screen displays choices
    () player clicks registered
