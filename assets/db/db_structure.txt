@@ -12,4 +12,4 @@ players
     losses:
     choice:
 
-NB: data are stored as JSON so all values must be strings!
+NB: data need not be strings!
