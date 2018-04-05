@@ -11,12 +11,13 @@
    (x) app initializes Firebase dB
    (x) app stores player's choice in DB
    (x) update to fix bug - initialization should clear data from dB and does not (see DB-experiments)
-   () update to add data for a player and record change in global
-      <> name
-      <> choice
-      <> wins
-      <> losses
+   (x) update to add data element for a player and record change in global
+      <x> name
+      <x> choice
+      <x> wins
+      <x> losses
    () update to zero one player's info
+[] Game updates db for player one's information on entry
 []  screen updates to indicate second player can enter choice
    () player's screen displays choices
    () player clicks registered

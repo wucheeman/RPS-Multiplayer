@@ -37,6 +37,7 @@ const dbInterface = {
     this.database = firebase.database();
     // zeros data in DB
     // TODO: not DRY, but calling external method breaks game, so leaving for now
+    // TODO: uncomment when unit test runs clean
     this.database.ref().set({
       p1: {
         name: '',
@@ -72,7 +73,9 @@ const dbInterface = {
     //     key: value
     //   });
     // updates single value of key/value pair
-    this.database.ref().child(player).update({key: value});
+    console.log(player, key, value);
+    // NOTE the [] around the 'key' variable!
+    this.database.ref().child(player).update({[key]: value});
     console.log('set a value in the DB');
   }
 }
