@@ -52,13 +52,14 @@ const dbInterface = {
       }
     });
   },
-  getDataElement: function(key) {
+  getDataElement: function(player, key) {
     // if firebaseInUse is true, get from Firebase, else get from localStorage
     console.log('in dbInterface.getDataElement()');
     // this retrieves data initially and whenever it changes
     // TODO: determine how to use this beyond simply displaying it
     this.database.ref().on("value", function(snapshot) {
-      console.log('logging snapshot.val().key: ' + snapshot.val().key);
+      const dataElementPath = 'snapshot.val().' + player + '.' + key;
+      console.log('logging dataElementPath: ' + dataElementPath);
     }, function(errorObject) {
       console.log("The read failed: " + errorObject.code);
     });
@@ -92,7 +93,17 @@ const managePlayers = {
     let message = '';
     if (this.playerOneName) {
       this.playerTwoName = playerName;
-      // TODO write to DBs
+      // TODO: not DRY; refactor
+      dbInterface.setDataElement('p2', 'name', playerName);
+      message = welcomePlayer(this.playerTwoName, 'p2');
+      render(message, '#nameLand', 'empty');
+      console.log('replacing welcome with name form');
+      setTimeout(() => {
+          render(makeNameInputForm(), '#nameLand', 'empty');
+        }, 2000);
+      // TODO fix this!
+      message = makeInitialPlayerControls(this.playerOneName, 'p1');
+      render(message, '#first_player_info', 'empty');
       console.log('playerTwoName is: ' + this.playerTwoName);
     } else {
       this.playerOneName = playerName;
@@ -103,7 +114,6 @@ const managePlayers = {
       setTimeout(() => {
           render(makeNameInputForm(), '#nameLand', 'empty');
         }, 2000);
-      // set timeout 
       message = makeInitialPlayerControls(this.playerOneName, 'p1');
       render(message, '#first_player_info', 'empty');
       console.log('playerOneName is: ' + this.playerOneName);
@@ -210,9 +220,9 @@ const rps = {
   playRound: function() {
     // drives play of a round of RPS
     // TODO: need some trigger to set this off
-    const p1Choice = this.retrievePlayerChoice('p1');
+    const p1Choice = this.retrievePlayerChoice('p1', 'choice');
     //console.log('In playRound, p1Choice is ' + p1Choice);
-    const p2Choice = this.retrievePlayerChoice('p2');
+    const p2Choice = this.retrievePlayerChoice('p2', 'choice');
     //console.log('in playRound, p2Choice is ' + p2Choice);
     if ((p1Choice === "rock") && (p2Choice === "scissors")) {
         console.log('p1 wins!');
@@ -252,10 +262,11 @@ const rps = {
     // TODO: this may need to move to playRound
     let message = makePlayerControls(managePlayers.playerOneName,  
                                      "p1",
-                                     this.wins[0],
-                                     this.losses[0]);
+                                    //  TODO: Delete?
+                                    //  this.wins[0],
+                                    //  this.losses[0]
+                                    );
     render(message, '#first_player_info', 'empty');
-    console.log('pinging the DB: ' + rps.retrievePlayerChoice("p1"));
   }
 
   // TODO: continue adding methods as needed
@@ -266,6 +277,7 @@ const rps = {
 //===============================================================
 
 const clickHandler = (e) => {
+  console.log('in clickHandler');
   const clickTarget = e.target.className;
   switch (clickTarget) {
     case 'btn.btn-square btn-success ml-2 addPlayer':
@@ -277,6 +289,7 @@ const clickHandler = (e) => {
       $('#player_name').val('');
       managePlayers.enterGame(newPlayer);
       break;
+    // TODO: refactor to be more DRY?
     case 'rock p1' :
       console.log('p1 chose rock');
       dbInterface.setDataElement('p1', 'choice', 'rock');
@@ -292,14 +305,17 @@ const clickHandler = (e) => {
     case 'rock p2' :
       console.log('p2 chose rock');
       dbInterface.setDataElement('p2', 'choice', 'rock');
+      rps.playRound();
       break;
     case 'paper p2':
       console.log('p2 chose paper');
       dbInterface.setDataElement('p2', 'choice', 'paper');
+      rps.playRound();
       break;
     case 'scissors p2':
       console.log('p2 chose scissors');
       dbInterface.setDataElement('p2', 'choice', 'scissors');
+      rps.playRound();
       break;
     // case <value n> :
     //     code to be executed if <variable> has <value n>
