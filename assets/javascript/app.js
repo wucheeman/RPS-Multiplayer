@@ -144,8 +144,14 @@ const rps = {
   losses: [0, 0],
   tieGames: 0,
   choices: ['rock', 'paper', 'scissors'],
+  p1Name: '',
   p1Choice: '',
+  p1Wins: 0,
+  p1Losses: 0,
+  p1Name: '',
   p2Choice: '',
+  p2Wins: 0,
+  p2Losses: 0,
   // TODO: add further properties
   initializeP1Data: function() {
     dbInterface.zeroPlayerData('p1');
@@ -162,23 +168,23 @@ const rps = {
   incrementPlayerWins: function(player) {
     // increment player's wins
     if (player === 'p1') {
-      this.wins[0]++;
+      this.p1Wins++;
       // TODO: write to DB
-      console.log('player 1 has won: ' + this.wins[0]);
+      console.log('player 1 has won: ' + this.p1Wins);
     } else {
-      this.wins[1]++;
+      this.p2Wins++;
       // TODO: write to DB
-      console.log('player 2 has won: ' + this.wins[0]);
+      console.log('player 2 has won: ' + this.p2Wins);
     }
   },
   incrementPlayerLosses: function(player) {
     // increment player's losses
     if (player === 'p1') {
-      this.losses[0]++;
+      this.p1Losses++;
       // TODO: write to DB
       console.log('player 1 has lost: ' + this.losses[0]);
     } else {
-      this.wins[1]++;
+      this.p2Losses++;
       // TODO: write to DB
       console.log('player 2 has lost: ' + this.losses[0]);
     }
@@ -189,9 +195,9 @@ const rps = {
   getPlayerWins: function(player) {
     // gets player's wins
     if (player === 'p1') {
-      return this.wins[0];
+      return this.p1Wins;
     } else {
-      return this.wins[1];
+      return this.p2Wins;
     }
   },
   getPlayerLosses: function(player) {
@@ -265,16 +271,16 @@ const rps = {
   showPlayerOneControls: function() {
     const message = makePlayerControls(managePlayers.playerOneName,  
       "p1",
-      this.wins[0],
-      this.losses[0]
+      this.p1Wins,
+      this.p1Losses
      );
     render(message, '#first_player_info', 'empty');
   },
   showPlayerTwoControls: function() {
     const message = makePlayerControls(managePlayers.playerTwoName,  
       "p2",
-      this.wins[1],
-      this.losses[1]
+      this.p2Wins,
+      this.p2Losses
      );
     render(message, '#second_player_info', 'empty');
   }
