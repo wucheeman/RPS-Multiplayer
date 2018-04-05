@@ -52,14 +52,34 @@ const dbInterface = {
       }
     });
   },
-  getDataElement: function(player, key) {
+  initializeDataElements: function() {
     // if firebaseInUse is true, get from Firebase, else get from localStorage
-    console.log('in dbInterface.getDataElement()');
+    console.log('in dbInterface.initializeDataElements()');
     // this retrieves data initially and whenever it changes
-    // TODO: determine how to use this beyond simply displaying it
     this.database.ref().on("value", function(snapshot) {
-      const dataElementPath = 'snapshot.val().' + player + '.' + key;
-      console.log('logging dataElementPath: ' + dataElementPath);
+    
+    //   const dataElementPath = 'snapshot.val().' + player + '.' + key;
+    //   console.log('logging dataElementPath: ' + dataElementPath);
+
+    // this dumps all values out
+    // const player1 = snapshot.val().p1;
+    // const player2 = snapshot.val().p2;
+    rps.p1Name =  snapshot.val().p1.name;
+    rps.p1Choice = snapshot.val().p1.choice;
+    rps.p1Wins = snapshot.val().p1.wins;
+    rps.p1Losses = snapshot.val().p1.losses;
+    console.log('rps.p1Name is: ' + rps.p1Name);
+    console.log('rps.p1Choice is: ' + rps.p1Choice);
+    console.log('rps.p1Wins is: ' + rps.p1Wins);
+    console.log('rps.p1Losses is: ' +  rps.p1Losses);
+    rps.p2Name =  snapshot.val().p2.name;
+    rps.p2Choice = snapshot.val().p2.choice;
+    rps.p2Wins = snapshot.val().p2.wins;
+    rps.p2Losses = snapshot.val().p2.Losses;
+    console.log('rps.p2Name is: ' + rps.p2Name);
+    console.log('rps.p2Choice is: ' + rps.p2Choice);
+    console.log('rps.p2Wins is: ' + rps.p2Wins);
+    console.log('rps.p2Losses is: ' +  rps.p2Losses);
     }, function(errorObject) {
       console.log("The read failed: " + errorObject.code);
     });
@@ -148,11 +168,12 @@ const rps = {
   p1Choice: '',
   p1Wins: 0,
   p1Losses: 0,
-  p1Name: '',
+  p2Name: '',
   p2Choice: '',
   p2Wins: 0,
   p2Losses: 0,
-  // TODO: add further properties
+  // TODO: many of these methods can probably be deleted 
+
   initializeP1Data: function() {
     dbInterface.zeroPlayerData('p1');
   },
@@ -212,12 +233,14 @@ const rps = {
     console.log('in sendPlayerChoice');
     // TODO: build this
   },
+
+  // TODO: this is broken, or will be soon
   retrievePlayerChoice: function(player) {
     // gets other player's choice from the DB
     // TODO: current dummy functionality
     if (player === 'p1') {
       // return this.p1Choice;
-      const testVar = dbInterface.getDataElement('p1Choice');
+      const testVar = dbInterface.initializeDataElements('p1Choice');
       console.log('retrieved p1s choice from DB: ' + testVar);  
     } else {
       return this.p2Choice;

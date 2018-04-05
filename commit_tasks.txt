@@ -24,7 +24,8 @@
    (x) player's screen displays choices
    [x] Fix bug; player 1 win/loss info is undefined when controls are first popped up
    (x) player one's screen controls removed
-   () fix bug: after p1 screen empties, name shows as undefined. Prob need to start reading the DB! <== RESUME
+   () fix bug: after p1 screen empties, name shows as undefined. Prob need to start reading the DB!
+   () fix rps.retrievePlayerChoice, which got broken in a good way
 
    () player two clicks are registered
 [] After second player makes choice, the game determines/announces result and updates counters in DB.

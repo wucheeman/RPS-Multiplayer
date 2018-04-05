@@ -152,6 +152,10 @@
       dbInterface.setDataElement('p1', 'name', 'frodo');
       // dbInterface.zeroPlayerData('p1');
       // dbInterface.setDataElement('p1', 'name', 'bilbo');
+      console.log('testing read of dB');
+      dbInterface.initializeDataElements();
+      dbInterface.setDataElement('p1', 'name', 'gandalf');
+      console.log('rps.p1Name is: ' + rps.p1Name);
 
 
       console.log('*** DONE WITH UNIT TEST ***')
