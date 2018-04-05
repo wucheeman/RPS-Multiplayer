@@ -34,6 +34,8 @@ Functionality
 [] Game initializes DB correctly
 [] Game initializes DB correctly
 [] Unit tests complete as expected
+[] Game rejects empty string as name
+[] Game trims leading/trailing white space from name
 
 Display
 =======

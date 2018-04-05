@@ -102,8 +102,8 @@ const managePlayers = {
           render(makeNameInputForm(), '#nameLand', 'empty');
         }, 2000);
       // TODO fix this!
-      message = makeInitialPlayerControls(this.playerOneName, 'p1');
-      render(message, '#first_player_info', 'empty');
+      message = makeInitialPlayerControls(this.playerTwoName, 'p2');
+      render(message, '#second_player_info', 'empty');
       console.log('playerTwoName is: ' + this.playerTwoName);
     } else {
       this.playerOneName = playerName;
@@ -260,13 +260,23 @@ const rps = {
     console.log('in rps.startPlay()');
     console.log('triggering setup of buttons now');
     // TODO: this may need to move to playRound
-    let message = makePlayerControls(managePlayers.playerOneName,  
-                                     "p1",
-                                    //  TODO: Delete?
-                                    //  this.wins[0],
-                                    //  this.losses[0]
-                                    );
+    this.showPlayerOneControls();
+  },
+  showPlayerOneControls: function() {
+    const message = makePlayerControls(managePlayers.playerOneName,  
+      "p1",
+      this.wins[0],
+      this.losses[0]
+     );
     render(message, '#first_player_info', 'empty');
+  },
+  showPlayerTwoControls: function() {
+    const message = makePlayerControls(managePlayers.playerTwoName,  
+      "p2",
+      this.wins[1],
+      this.losses[1]
+     );
+    render(message, '#second_player_info', 'empty');
   }
 
   // TODO: continue adding methods as needed
@@ -289,18 +299,27 @@ const clickHandler = (e) => {
       $('#player_name').val('');
       managePlayers.enterGame(newPlayer);
       break;
-    // TODO: refactor to be more DRY?
+    // TODO: refactor to be more DRY? It's really wet!!!
     case 'rock p1' :
       console.log('p1 chose rock');
       dbInterface.setDataElement('p1', 'choice', 'rock');
+      message = makeInitialPlayerControls(this.playerOneName, 'p1');
+      render(message, '#first_player_info', 'empty');
+      rps.showPlayerTwoControls();
       break;
     case 'paper p1':
     console.log('p1 chose paper');
       dbInterface.setDataElement('p1', 'choice', 'paper');
+      message = makeInitialPlayerControls(this.playerOneName, 'p1');
+      render(message, '#first_player_info', 'empty');
+      rps.showPlayerTwoControls();
       break;
     case 'scissors p1':
       console.log('p1 chose scissors');
       dbInterface.setDataElement('p1', 'choice', 'scissors');
+      message = makeInitialPlayerControls(this.playerOneName, 'p1');
+      render(message, '#first_player_info', 'empty');
+      rps.showPlayerTwoControls();
       break;
     case 'rock p2' :
       console.log('p2 chose rock');
