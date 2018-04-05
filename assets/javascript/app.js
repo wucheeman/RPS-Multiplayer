@@ -235,54 +235,58 @@ const rps = {
   },
 
   // TODO: this is broken, or will be soon
-  retrievePlayerChoice: function(player) {
-    // gets other player's choice from the DB
-    // TODO: current dummy functionality
-    if (player === 'p1') {
-      // return this.p1Choice;
-      const testVar = dbInterface.initializeDataElements('p1Choice');
-      console.log('retrieved p1s choice from DB: ' + testVar);  
-    } else {
-      return this.p2Choice;
-    }
-  },
+  // DELETE instead?
+  // retrievePlayerChoice: function(player) {
+  //   // gets other player's choice from the DB
+  //   // TODO: current dummy functionality
+  //   if (player === 'p1') {
+  //     // return this.p1Choice;
+  //     const testVar = dbInterface.initializeDataElements('p1Choice');
+  //     console.log('retrieved p1s choice from DB: ' + testVar);  
+  //   } else {
+  //     return this.p2Choice;
+  //   }
+  // },
   playRound: function() {
     // drives play of a round of RPS
-    // TODO: need some trigger to set this off
-    const p1Choice = this.retrievePlayerChoice('p1', 'choice');
+    // triggered by second player making a choice
+    // TODO: delete next 4 lines
+    // const p1Choice = this.retrievePlayerChoice('p1', 'choice');
     //console.log('In playRound, p1Choice is ' + p1Choice);
-    const p2Choice = this.retrievePlayerChoice('p2', 'choice');
+    // const p2Choice = this.retrievePlayerChoice('p2', 'choice');
     //console.log('in playRound, p2Choice is ' + p2Choice);
-    if ((p1Choice === "rock") && (p2Choice === "scissors")) {
+    if ((rps.p1Choice === "rock") && (rps.p2Choice === "scissors")) {
         console.log('p1 wins!');
         this.incrementPlayerWins('p1');
         this.incrementPlayerLosses('p2');
-    } else if ((p1Choice === "rock") && (p2Choice === "paper")) {
+    } else if ((rps.p1Choice === "rock") && (rps.p2Choice === "paper")) {
         console.log('p2 wins!');
         this.incrementPlayerWins('p2');
         this.incrementPlayerLosses('p1');
 
-    } else if ((p1Choice === "scissors") && (p2Choice === "rock")) {
+    } else if ((rps.p1Choice === "scissors") && (rps.p2Choice === "rock")) {
         console.log('p2 wins!');
         this.incrementPlayerWins('p2');
         this.incrementPlayerLosses('p1');
-    } else if ((p1Choice === "scissors") && (p2Choice === "paper")) {
+    } else if ((rps.p1Choice === "scissors") && (rps.p2Choice === "paper")) {
         console.log('p1 wins!');
         this.incrementPlayerWins('p1');
         this.incrementPlayerLosses('p2');
 
-    } else if ((p1Choice === "paper") && (p2Choice === "rock")) {
+    } else if ((rps.p1Choice === "paper") && (rps.p2Choice === "rock")) {
         console.log('p1 wins!');
         this.incrementPlayerWins('p1');
         this.incrementPlayerLosses('p2');
-    } else if ((p1Choice === "paper") && (p2Choice === "scissors")) {
+    } else if ((rps.p1Choice === "paper") && (rps.p2Choice === "scissors")) {
         console.log('p2 wins!');
         this.incrementPlayerWins('p2');
         this.incrementPlayerLosses('p1');
 
-    } else if (p1Choice === p2Choice) {
+    } else if (rps.p1Choice === rps.p2Choice) {
         console.log('it is a tie!');
         this.incrementTies();
+    } else {
+      console.log('something went badly wrong in rps.PlayRound');
     }
   },
   startPlay: function() {

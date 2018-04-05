@@ -26,10 +26,12 @@
    (x) player one's screen controls removed
    (x) game reads player dataelements from DB in realtime
    (x) fix bug: after p1 screen empties, name shows as undefined.
-   () fix rps.retrievePlayerChoice, which got broken in a good way
+   (x) fix rps.retrievePlayerChoice, which got broken in a good way
 
-   () player two clicks are registered
-[] After second player makes choice, the game determines/announces result and updates counters in DB.
+   (x) player two clicks are registered
+[x] After second player makes choice, the game determines result
+[] Game announces result on page
+[] Game updates counters in DB.
 [] Game resets automatically for the next round after ~2 seconds
 [] Players win/loss display updates after each round
 
