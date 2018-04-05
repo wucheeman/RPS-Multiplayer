@@ -332,21 +332,22 @@ const clickHandler = (e) => {
     case 'rock p1' :
       console.log('p1 chose rock');
       dbInterface.setDataElement('p1', 'choice', 'rock');
-      message = makeInitialPlayerControls(this.playerOneName, 'p1');
+      console.log('rps.p1Name is:' + rps.p1Name);
+      message = makeInitialPlayerControls(rps.p1Name, 'p1');
       render(message, '#first_player_info', 'empty');
       rps.showPlayerTwoControls();
       break;
     case 'paper p1':
     console.log('p1 chose paper');
       dbInterface.setDataElement('p1', 'choice', 'paper');
-      message = makeInitialPlayerControls(this.playerOneName, 'p1');
+      message = makeInitialPlayerControls(rps.p1Name, 'p1');
       render(message, '#first_player_info', 'empty');
       rps.showPlayerTwoControls();
       break;
     case 'scissors p1':
       console.log('p1 chose scissors');
       dbInterface.setDataElement('p1', 'choice', 'scissors');
-      message = makeInitialPlayerControls(this.playerOneName, 'p1');
+      message = makeInitialPlayerControls(rps.p1Name, 'p1');
       render(message, '#first_player_info', 'empty');
       rps.showPlayerTwoControls();
       break;
@@ -377,7 +378,8 @@ const clickHandler = (e) => {
 const initializeGlobals = () => {
   // initializes global variables... if any
   console.log('in initializeGlobals');
-  dbInterface.initializeDB()
+  dbInterface.initializeDB();
+  dbInterface.initializeDataElements();
   rps.initializeGameData();
 }
 
