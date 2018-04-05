@@ -57,29 +57,24 @@ const dbInterface = {
     console.log('in dbInterface.initializeDataElements()');
     // this retrieves data initially and whenever it changes
     this.database.ref().on("value", function(snapshot) {
-    
-    //   const dataElementPath = 'snapshot.val().' + player + '.' + key;
-    //   console.log('logging dataElementPath: ' + dataElementPath);
-
-    // this dumps all values out
-    // const player1 = snapshot.val().p1;
-    // const player2 = snapshot.val().p2;
     rps.p1Name =  snapshot.val().p1.name;
     rps.p1Choice = snapshot.val().p1.choice;
     rps.p1Wins = snapshot.val().p1.wins;
     rps.p1Losses = snapshot.val().p1.losses;
-    console.log('rps.p1Name is: ' + rps.p1Name);
-    console.log('rps.p1Choice is: ' + rps.p1Choice);
-    console.log('rps.p1Wins is: ' + rps.p1Wins);
-    console.log('rps.p1Losses is: ' +  rps.p1Losses);
     rps.p2Name =  snapshot.val().p2.name;
     rps.p2Choice = snapshot.val().p2.choice;
     rps.p2Wins = snapshot.val().p2.wins;
-    rps.p2Losses = snapshot.val().p2.Losses;
-    console.log('rps.p2Name is: ' + rps.p2Name);
-    console.log('rps.p2Choice is: ' + rps.p2Choice);
-    console.log('rps.p2Wins is: ' + rps.p2Wins);
-    console.log('rps.p2Losses is: ' +  rps.p2Losses);
+    rps.p2Losses = snapshot.val().p2.losses;
+
+    // console.log('rps.p1Name is: ' + rps.p1Name);
+    // console.log('rps.p1Choice is: ' + rps.p1Choice);
+    // console.log('rps.p1Wins is: ' + rps.p1Wins);
+    // console.log('rps.p1Losses is: ' +  rps.p1Losses);
+
+    // console.log('rps.p2Name is: ' + rps.p2Name);
+    // console.log('rps.p2Choice is: ' + rps.p2Choice);
+    // console.log('rps.p2Wins is: ' + rps.p2Wins);
+    // console.log('rps.p2Losses is: ' +  rps.p2Losses);
     }, function(errorObject) {
       console.log("The read failed: " + errorObject.code);
     });
@@ -187,27 +182,29 @@ const rps = {
     this.tieGames = 0;
   },
   incrementPlayerWins: function(player) {
-    // increment player's wins
+    console.log('in incrementPlayerWins');
     if (player === 'p1') {
       this.p1Wins++;
-      // TODO: write to DB
-      console.log('player 1 has won: ' + this.p1Wins);
+      dbInterface.setDataElement('p1', 'wins', this.p1Wins);
+      console.log('player 1 has won: ' + rps.p1Wins);
     } else {
       this.p2Wins++;
-      // TODO: write to DB
-      console.log('player 2 has won: ' + this.p2Wins);
+      dbInterface.setDataElement('p2', 'wins', this.p2Wins);
+      console.log('player 2 has won: ' + rps.p2Wins);
     }
   },
   incrementPlayerLosses: function(player) {
-    // increment player's losses
+    console.log('in incrementPlayerLosses');
     if (player === 'p1') {
       this.p1Losses++;
-      // TODO: write to DB
-      console.log('player 1 has lost: ' + this.losses[0]);
+      dbInterface.setDataElement('p1', 'losses', this.p1Losses);
+      console.log('player 1 has lost: ' + rps.p1Losses);
     } else {
+      console.log('rps.p2Losses is now: ' + rps.p2Losses);  
       this.p2Losses++;
-      // TODO: write to DB
-      console.log('player 2 has lost: ' + this.losses[0]);
+      console.log('rps.p2Losses is now: ' + rps.p2Losses);
+      dbInterface.setDataElement('p2', 'losses', this.p2Losses);
+      console.log('player 2 has lost: ' + rps.p2Losses);
     }
   },
   incrementTies: function() {

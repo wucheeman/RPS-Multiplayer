@@ -30,8 +30,8 @@
 
    (x) player two clicks are registered
 [x] After second player makes choice, the game determines result
+[x] Game updates counters in DB.
 [] Game announces result on page
-[] Game updates counters in DB.
 [] Game resets automatically for the next round after ~2 seconds
 [] Players win/loss display updates after each round
 
