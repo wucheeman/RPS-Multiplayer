@@ -35,14 +35,23 @@ const dbInterface = {
     };
     firebase.initializeApp(config);
     this.database = firebase.database();
-    // TODO: under construction; un comment when ready to go
-    //this.removeExistingData();
-    console.log('done initializing Firebase');
+    // zeros data in DB
+    // TODO: not DRY, but calling external method breaks game, so leaving for now
+    this.database.ref().set({
+      p1: {
+        name: '',
+        wins: 0,
+        losses: 0,
+        choice: ''
+      },
+      p2: {
+        name: '',
+        wins: 0,
+        losses: 0,
+        choice: ''
+      }
+    });
   },
-  // TODO: under construction; un comment when ready to go
-  // removeExistingData: function() {
-  //   this.database.remove()
-  // },
   getDataElement: function(key) {
     // if firebaseInUse is true, get from Firebase, else get from localStorage
     console.log('in dbInterface.getDataElement()');
@@ -54,15 +63,16 @@ const dbInterface = {
       console.log("The read failed: " + errorObject.code);
     });
   },
-  setDataElement: function(key, value) {
-    /// if firebaseInUse is true, write data to Firebase
-    // else write it to localStorage
+  setDataElement: function(player, key, value) {
+    /// if firebaseInUse is true, write data to Firebase else write to localStorage
     // return outcome
     console.log('in dbInterface.setDataElement()');
-    // Note how we are using the Firebase .set() method
-      this.database.ref().set({
-        key: value
-      });
+    // // NB .set() overwrites what was there!!!
+    //   this.database.ref().set({
+    //     key: value
+    //   });
+    // updates single value of key/value pair
+    this.database.ref().child(player).update({key: value});
     console.log('set a value in the DB');
   }
 }

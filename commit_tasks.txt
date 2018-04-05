@@ -10,7 +10,7 @@
 [] Store game data in Firebase
    (x) app initializes Firebase dB
    (x) app stores player's choice in DB
-   () update to fix bug - initialization should clear data from dB and does not (see DB-experiments)
+   (x) update to fix bug - initialization should clear data from dB and does not (see DB-experiments)
    () update to add data for a player and record change in global
       <> name
       <> choice
