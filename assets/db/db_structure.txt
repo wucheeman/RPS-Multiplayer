@@ -1,0 +1,15 @@
+players
+
+  p1
+    name:
+    wins:
+    losses:
+    choice:
+
+  p2
+    name:
+    wins:
+    losses:
+    choice:
+
+NB: data are stored as JSON so all values must be strings!
