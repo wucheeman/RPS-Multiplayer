@@ -6,30 +6,28 @@
 [x] update screen so play can begin
    (x) first player's screen updated
    (x) player clicks registered
-[] rough in storing game data in Firebase
+[x] welcome player when player is added per target
+[] Store game data in Firebase
    (x) app initializes Firebase dB
    (x) app stores player's choice in DB
-
-REVIEW CODERS BAY, DO-MORE-PROPERTIES, AND ADD_CHILD (very important!)
-
-   () fix bug - initialization should clear data from dB and does not
-   () fix bug: stores single value; as key? cannot store multiple values
-   () app retrieves data from dB
-   () app watches dB updates in realtime
-
-[x] welcome player when player is added per target
-[] screen outlines control area to tell first player she can enter choice (defer to beautification time?)
+   () update to fix bug - initialization should clear data from dB and does not (see DB-experiments)
+   () update to add data for a player and record change in global
+      <> name
+      <> choice
+      <> wins
+      <> losses
+   () update to zero one player's info
 []  screen updates to indicate second player can enter choice
-   () player's screen updated to indicate turn (defer to beautification time?
    () player's screen displays choices
    () player clicks registered
-[] After the players make their selection, the game gives result - a win for one or the other player or a tie.
+[] After second player makes choice, the game determines/announces result and updates counters.
 [] Game resets automatically for the next round after ~2 seconds
-[] Game tracks each player's wins and losses. Tracking ties is optional.
+[] Players win/loss display updates
 
 [] Game supports chat between the two players
 [] Chat need not be persisted
 [] Player leaves by reloading page
+SEE MATERIAL on presennce - exercises 07/15 and /16
 [] Game notifies other player via 'disconnect' message in chat
 [] Game removes departed player's data from database while retaining other player's data
 [] If necessary at submission time, incomplete sections have pseudocode describing what remains to be done
@@ -38,3 +36,4 @@ REVIEW CODERS BAY, DO-MORE-PROPERTIES, AND ADD_CHILD (very important!)
   () improve fonts and font-sizes
   () improve responsiveness - widths, heights
   () replace top row with hero bar
+  () screen outlines control area to tell first player she can enter choice 
