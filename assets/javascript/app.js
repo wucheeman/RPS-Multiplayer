@@ -92,9 +92,11 @@ const managePlayers = {
     let message = '';
     if (this.playerOneName) {
       this.playerTwoName = playerName;
+      // TODO write to DBs
       console.log('playerTwoName is: ' + this.playerTwoName);
     } else {
       this.playerOneName = playerName;
+      dbInterface.setDataElement('p1', 'name', playerName);
       message = welcomePlayer(this.playerOneName, 'p1');
       render(message, '#nameLand', 'empty');
       console.log('replacing welcome with name form');
@@ -136,20 +138,13 @@ const rps = {
   p2Choice: '',
   // TODO: add further properties
   initializeP1Data: function() {
-    // TODO: refactor/simplify?
-    this.wins[0] = 0;
-    this.losses[0] = 0;
-    this.p1Choice = '';
+    dbInterface.zeroPlayerData('p1');
   },
   initializeP2Data: function() {
-    // TODO: refactor/simplify?
-    this.wins[1] = 0;
-    this.losses[1] = 0;
-    this.p2Choice = '';
+    dbInterface.zeroPlayerData('p2');
   },
   initializeGameData: function() {
     console.log('in rps.initializeGameData()')
-    // initializes both player's data
     this.initializeP1Data();
     this.initializeP2Data();
     this.tieGames = 0;
@@ -158,9 +153,11 @@ const rps = {
     // increment player's wins
     if (player === 'p1') {
       this.wins[0]++;
+      // TODO: write to DB
       console.log('player 1 has won: ' + this.wins[0]);
     } else {
       this.wins[1]++;
+      // TODO: write to DB
       console.log('player 2 has won: ' + this.wins[0]);
     }
   },
@@ -168,9 +165,11 @@ const rps = {
     // increment player's losses
     if (player === 'p1') {
       this.losses[0]++;
+      // TODO: write to DB
       console.log('player 1 has lost: ' + this.losses[0]);
     } else {
       this.wins[1]++;
+      // TODO: write to DB
       console.log('player 2 has lost: ' + this.losses[0]);
     }
   },
@@ -282,7 +281,7 @@ const clickHandler = (e) => {
     case 'btn.btn-square btn-success ml-2 addPlayer':
       console.log('clicked on start button');
       e.defaultPrevented;
-      const newPlayer = $('#player_name').val();
+      const newPlayer = $('#player_name').val().trim();
       console.log('calling managePlayers.enterGame');
       // TODO: move to render()
       $('#player_name').val('');
