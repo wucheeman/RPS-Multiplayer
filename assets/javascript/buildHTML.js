@@ -1,6 +1,15 @@
 // buildHTML.js
 // builds dynamic HTML for Multiplayer RPS
 
+const announceResults = (playerName) => {
+  // builds announcement in central region of game
+  const message = `
+    <h3 class="text-center">${playerName} Wins!!!</h3>
+    <h4 class="text-center">Let's Go For Another Round!</h4>
+  `
+  return message;
+}
+
 const makeNameInputForm = () => {
   const message = `
     <div class="input-group mb-3">

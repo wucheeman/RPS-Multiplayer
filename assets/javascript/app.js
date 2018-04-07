@@ -8,6 +8,8 @@ const dataElement = {
   value: ''
 }
 
+let winner;
+
 // GLOBAL OBJECTS
 //===============================================================
 
@@ -254,6 +256,7 @@ const rps = {
     //console.log('in playRound, p2Choice is ' + p2Choice);
     if ((rps.p1Choice === "rock") && (rps.p2Choice === "scissors")) {
         console.log('p1 wins!');
+        winner = rps.p1Name;
         this.incrementPlayerWins('p1');
         this.incrementPlayerLosses('p2');
     } else if ((rps.p1Choice === "rock") && (rps.p2Choice === "paper")) {
@@ -285,12 +288,23 @@ const rps = {
     } else {
       console.log('something went badly wrong in rps.PlayRound');
     }
+    this.endPlay();
   },
   startPlay: function() {
     console.log('in rps.startPlay()');
     console.log('triggering setup of buttons now');
     // TODO: this may need to move to playRound
     this.showPlayerOneControls();
+  },
+  endPlay: function() {
+    let message = makeInitialPlayerControls(rps.p2Name, 'p2');
+    render(message, '#second_player_info', 'empty');
+    message = announceResults(winner);
+    // console.log(message);
+    render(message, '#outcome_info', 'empty');
+    // TODO updatecounters updated
+    // trigger start of new game emptying the central region and showing the first player's controls
+    // winner = '';
   },
   showPlayerOneControls: function() {
     const message = makePlayerControls(managePlayers.playerOneName,  
@@ -382,6 +396,7 @@ const initializeGlobals = () => {
   dbInterface.initializeDB();
   dbInterface.initializeDataElements();
   rps.initializeGameData();
+  winner = '';
 }
 
 const initializeDisplay = () => {
