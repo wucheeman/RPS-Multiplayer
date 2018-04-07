@@ -119,7 +119,7 @@ const managePlayers = {
           render(makeNameInputForm(), '#nameLand', 'empty');
         }, 2000);
       // TODO fix this!
-      message = makeInitialPlayerControls(this.playerTwoName, 'p2');
+      message = makeInitialPlayerControls(this.playerTwoName, 'p2', rps.p2Wins, rps.p2Losses);
       render(message, '#second_player_info', 'empty');
       console.log('playerTwoName is: ' + this.playerTwoName);
     } else {
@@ -131,7 +131,7 @@ const managePlayers = {
       setTimeout(() => {
           render(makeNameInputForm(), '#nameLand', 'empty');
         }, 2000);
-      message = makeInitialPlayerControls(this.playerOneName, 'p1');
+      message = makeInitialPlayerControls(this.playerOneName, 'p1', rps.p1Wins, rps.p1Losses);
       render(message, '#first_player_info', 'empty');
       console.log('playerOneName is: ' + this.playerOneName);
     }
@@ -297,14 +297,21 @@ const rps = {
     this.showPlayerOneControls();
   },
   endPlay: function() {
-    let message = makeInitialPlayerControls(rps.p2Name, 'p2');
+    let message = makeInitialPlayerControls(rps.p2Name, 'p2', rps.p2Wins, rps.p2Losses);
     render(message, '#second_player_info', 'empty');
     message = announceResults(winner);
     // console.log(message);
     render(message, '#outcome_info', 'empty');
-    // TODO updatecounters updated
+    rps.updateCounters();
+    console.log('back from updateCounters');
     // trigger start of new game emptying the central region and showing the first player's controls
     // winner = '';
+  },
+  updateCounters: function() {
+    let message = makeInitialPlayerControls(rps.p1Name, 'p1', rps.p1Wins, rps.p1Losses);
+    render(message, '#first_player_info', 'empty');
+    message = makeInitialPlayerControls(rps.p2Name, 'p2', rps.p2Wins, rps.p2Losses);
+    render(message, '#second_player_info', 'empty');
   },
   showPlayerOneControls: function() {
     const message = makePlayerControls(managePlayers.playerOneName,  
@@ -348,21 +355,21 @@ const clickHandler = (e) => {
       console.log('p1 chose rock');
       dbInterface.setDataElement('p1', 'choice', 'rock');
       console.log('rps.p1Name is:' + rps.p1Name);
-      message = makeInitialPlayerControls(rps.p1Name, 'p1');
+      message = makeInitialPlayerControls(rps.p1Name, 'p1', rps.p1Wins, rps.p1Losses);
       render(message, '#first_player_info', 'empty');
       rps.showPlayerTwoControls();
       break;
     case 'paper p1':
     console.log('p1 chose paper');
       dbInterface.setDataElement('p1', 'choice', 'paper');
-      message = makeInitialPlayerControls(rps.p1Name, 'p1');
+      message = makeInitialPlayerControls(rps.p1Name, 'p1', rps.p1Wins, rps.p1Losses);
       render(message, '#first_player_info', 'empty');
       rps.showPlayerTwoControls();
       break;
     case 'scissors p1':
       console.log('p1 chose scissors');
       dbInterface.setDataElement('p1', 'choice', 'scissors');
-      message = makeInitialPlayerControls(rps.p1Name, 'p1');
+      message = makeInitialPlayerControls(rps.p1Name, 'p1', rps.p1Wins, rps.p1Losses);
       render(message, '#first_player_info', 'empty');
       rps.showPlayerTwoControls();
       break;

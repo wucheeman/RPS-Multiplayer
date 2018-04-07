@@ -3,7 +3,9 @@
 
 const announceResults = (playerName) => {
   // builds announcement in central region of game
+  // TODO: (future) improve HTML/CSS
   const message = `
+    <br>
     <h3 class="text-center">${playerName} Wins!!!</h3>
     <h4 class="text-center">Let's Go For Another Round!</h4>
   `
@@ -38,7 +40,7 @@ const makePlayerControls = (playerName, playerID, playerWins, playerLosses) => {
 }
 
 // TODO (future): make this DRY
-const makeInitialPlayerControls = (playerName, playerID) => {
+const makeInitialPlayerControls = (playerName, playerID, playerWins, playerLosses) => {
   // builds initial control-area display for a player
   console.log('in buildHTmL makeInitialPlayerControls')
   const message = `
@@ -48,7 +50,7 @@ const makeInitialPlayerControls = (playerName, playerID) => {
     <br>
     <br>
     <hr>
-    <h6><span class='wins'>Wins: 0</span><span class='losses'>   Losses: 0</span></h6> 
+    <h6><span class='wins'>Wins: ${playerWins}</span><span class='losses'>   Losses: ${playerLosses}</span></h6> 
   `
   return message;
 }
