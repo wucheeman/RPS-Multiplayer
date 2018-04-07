@@ -12,6 +12,11 @@ const announceResults = (playerName) => {
   return message;
 }
 
+const emptyAnnouncementArea = () => {
+  const message = ``;
+  return message;
+}
+
 const makeNameInputForm = () => {
   const message = `
     <div class="input-group mb-3">

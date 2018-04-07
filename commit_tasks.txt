@@ -33,8 +33,8 @@
 [x] Game announces result on page
    (x) Results announced
    (x) Player 2 controls empty
-[] Players win/loss display updates after each round
-[] Game resets automatically for the next round after ~2 seconds
+[x] Players win/loss display updates after each round
+[-] Game resets automatically for the next round after ~2 seconds
 
 
 [] Game supports chat between the two players

@@ -18,7 +18,6 @@ const chatInterface = {
   // provides functionality for the chat interface
 }
 
-// TODO
 const dbInterface = {
   // provides single interface to Firebase and localStorage
   // currently only supports Firebase
@@ -156,7 +155,6 @@ const managePlayers = {
 // TODO
 const rps = {
   // provides functionality for play of the game
-  // TODO: settle on best representaton of these data
   wins: [0, 0],
   losses: [0, 0],
   tieGames: 0,
@@ -170,7 +168,6 @@ const rps = {
   p2Wins: 0,
   p2Losses: 0,
   // TODO: many of these methods can probably be deleted 
-
   initializeP1Data: function() {
     dbInterface.zeroPlayerData('p1');
   },
@@ -249,11 +246,6 @@ const rps = {
   playRound: function() {
     // drives play of a round of RPS
     // triggered by second player making a choice
-    // TODO: delete next 4 lines
-    // const p1Choice = this.retrievePlayerChoice('p1', 'choice');
-    //console.log('In playRound, p1Choice is ' + p1Choice);
-    // const p2Choice = this.retrievePlayerChoice('p2', 'choice');
-    //console.log('in playRound, p2Choice is ' + p2Choice);
     if ((rps.p1Choice === "rock") && (rps.p2Choice === "scissors")) {
         console.log('p1 wins!');
         winner = rps.p1Name;
@@ -297,15 +289,25 @@ const rps = {
     this.showPlayerOneControls();
   },
   endPlay: function() {
+    // drives display at end of one play
     let message = makeInitialPlayerControls(rps.p2Name, 'p2', rps.p2Wins, rps.p2Losses);
     render(message, '#second_player_info', 'empty');
     message = announceResults(winner);
-    // console.log(message);
     render(message, '#outcome_info', 'empty');
+    // TODO: RESUME 2
+    // setTimeout needs to use rps.restartPlay as callback
+    setTimeout(() => { }, 2000);
     rps.updateCounters();
     console.log('back from updateCounters');
-    // trigger start of new game emptying the central region and showing the first player's controls
-    // winner = '';
+  },  
+  restartPlay: function() {
+    // sets up play of next game
+    console.log('in rps.restartPlay');
+    winner = '';
+    let message = emptyAnnouncementArea();
+    render(message, '#outcome_info', 'empty'); 
+    // TODO: RESUME 1: 
+    // shows the first player's controls
   },
   updateCounters: function() {
     let message = makeInitialPlayerControls(rps.p1Name, 'p1', rps.p1Wins, rps.p1Losses);
