@@ -97,10 +97,12 @@ const managePlayers = {
       dbInterface.setDataElement('p2', 'name', playerName);
       message = welcomePlayer(this.playerTwoName, 'p2');
       render(message, '#nameLand', 'empty');
-      console.log('replacing welcome with name form');
+      console.log('replacing welcome and indicating turn');
       setTimeout(() => {
-          render(makeNameInputForm(), '#nameLand', 'empty');
-        }, 2000);
+          const message = indicateTurn(this.playerOneName);
+          console.log(message);
+          render(message, '#nameLand', 'empty');
+        }, 1500);
       message = makeInitialPlayerControls(this.playerTwoName, 'p2', rps.p2Wins, rps.p2Losses);
       render(message, '#second_player_info', 'empty');
       console.log('playerTwoName is: ' + this.playerTwoName);

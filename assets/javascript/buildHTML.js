@@ -21,6 +21,14 @@ const announceResults = (playerName) => {
   return message;
 }
 
+const indicateTurn = (playerName) => {
+  console.log("in indicateTurn()");
+  const message = `
+      <h3>It's ${playerName}'s turn!</h3>
+  `
+  return message;
+}
+
 const emptyAnnouncementArea = () => {
   const message = ``;
   return message;
@@ -73,15 +81,14 @@ const welcomePlayer = (playerName, playerID) => {
   // builds welcome display for a player
   console.log('in buildHTmL welcomePlayer')
   let message = '';
+  let num;
   if (playerID === 'p1') {
-    message = `
-      <h5>Welcome, ${playerName}! You are Player 1</h5>
-    `
-    // TODO: remove once player 2 is supported
-    return message;
+    num = 1;
   } else {
-    console.log('player 2 not yet supported')
+    num = 2;
   }
-  // TODO: use once player 2 is supported
+  message = `
+    <h5>Welcome, ${playerName}! You are Player ${num}</h5>
+  `
   return message;
 }
