@@ -50,16 +50,6 @@ const dbInterface = {
     rps.p2Choice = snapshot.val().p2.choice;
     rps.p2Wins = snapshot.val().p2.wins;
     rps.p2Losses = snapshot.val().p2.losses;
-
-    // console.log('rps.p1Name is: ' + rps.p1Name);
-    // console.log('rps.p1Choice is: ' + rps.p1Choice);
-    // console.log('rps.p1Wins is: ' + rps.p1Wins);
-    // console.log('rps.p1Losses is: ' +  rps.p1Losses);
-
-    // console.log('rps.p2Name is: ' + rps.p2Name);
-    // console.log('rps.p2Choice is: ' + rps.p2Choice);
-    // console.log('rps.p2Wins is: ' + rps.p2Wins);
-    // console.log('rps.p2Losses is: ' +  rps.p2Losses);
     }, function(errorObject) {
       console.log("The read failed: " + errorObject.code);
     });
@@ -299,10 +289,20 @@ const clickHandler = (e) => {
       console.log('clicked on start button');
       e.defaultPrevented;
       const newPlayer = $('#player_name').val().trim();
-      console.log('calling managePlayers.enterGame');
-      // TODO: move to render()
-      $('#player_name').val('');
-      managePlayers.enterGame(newPlayer);
+      if (validateNameInput(newPlayer)) {
+        console.log('calling managePlayers.enterGame');
+        // TODO: move to render()
+        $('#player_name').val('');
+        managePlayers.enterGame(newPlayer);
+      } else {
+        console.log('empty string, no good');
+        message = requestName();
+        console.log(message);
+        render(message, '#nameLand', 'empty');
+        setTimeout(() => {
+          render(makeNameInputForm(), '#nameLand', 'empty');
+        }, 1500);
+      }
       break;
     // TODO: refactor to be more DRY? It's really wet!!!
     case 'rock p1' :
@@ -314,7 +314,7 @@ const clickHandler = (e) => {
       rps.showPlayerTwoControls();
       break;
     case 'paper p1':
-    console.log('p1 chose paper');
+      console.log('p1 chose paper');
       dbInterface.setDataElement('p1', 'choice', 'paper');
       message = makeInitialPlayerControls(rps.p1Name, 'p1', rps.p1Wins, rps.p1Losses);
       render(message, '#first_player_info', 'empty');
@@ -405,6 +405,14 @@ const render = (message, location, action) => {
   }
   // TODO: this may need update
   $(location).append(message);
+}
+
+const validateNameInput = (newPlayer) => {
+  // any string is OK as long as it's not empty
+  if (newPlayer === '') {
+    return false
+  }
+  return true;
 }
 
 // GAME

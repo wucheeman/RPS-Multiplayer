@@ -92,3 +92,10 @@ const welcomePlayer = (playerName, playerID) => {
   `
   return message;
 }
+
+const requestName = () => {
+  const message = `
+    <h5>Please enter a name</h5>
+  `
+  return message;
+}

@@ -39,6 +39,7 @@
 [x] Fix bug: second player name does not appear in win announcments
 [x] Fix bug: game should announce tie correctly
 [x] Fix bug: name entry form appears when there are two players already
+[x] Fix bug; game accepts empty string as player name
 
 [] Game supports chat between the two players
 [] Chat need not be persisted
@@ -47,7 +48,7 @@ SEE MATERIAL on presence - exercises 07/15 and /16
 [] Game notifies other player via 'disconnect' message in chat
 [] Game removes departed player's data from database while retaining other player's data
 [] If necessary at submission time, incomplete sections have pseudocode describing what remains to be done
-[] Fix bug; game accepts empty string as player name
+
 
 [] beautify page as time permits
   () improve background colors
