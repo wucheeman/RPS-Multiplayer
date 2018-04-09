@@ -37,6 +37,7 @@
 [x] Game resets automatically for the next round after ~2 seconds
 [] Fix bug: game resets when second player joins on separate page
 [] Fix bug: second player name does not appear in win announcments
+[] Fix bug: game should announce tie correctly
 
 
 [] Game supports chat between the two players
