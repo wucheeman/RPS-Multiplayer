@@ -34,7 +34,9 @@
    (x) Results announced
    (x) Player 2 controls empty
 [x] Players win/loss display updates after each round
-[-] Game resets automatically for the next round after ~2 seconds
+[x] Game resets automatically for the next round after ~2 seconds
+[] Fix bug: game resets when second player joins on separate page
+[] Fix bug: second player name does not appear in win announcments
 
 
 [] Game supports chat between the two players

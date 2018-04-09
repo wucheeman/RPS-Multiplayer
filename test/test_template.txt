@@ -11,6 +11,7 @@ Requirements
 ============
 [] Uses both JQuery and Firebase
 [] Two players can play a game of Rock-Paper-Scissors
+[] Two players can join via separate browser windows and play game successfully
 [] Both players pick either `rock`, `paper` or `scissors`.
 [] Game indicates whose turn it is to make a choice
 [] After the players make their selection, the game gives result - a win for one or the other player or a tie.
@@ -37,10 +38,12 @@ Functionality
 [] Game rejects empty string as name
 [] Game trims leading/trailing white space from name
 
+
 Display
 =======
 Page need not closely resemble demo video
 [] name entry form does not appear when there are two players already
+[] Player names appear wherever/whenever appropriate
 
 Cleanup
 =======
