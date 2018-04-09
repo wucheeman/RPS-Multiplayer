@@ -36,21 +36,6 @@ const dbInterface = {
     };
     firebase.initializeApp(config);
     this.database = firebase.database();
-      // zero data in DB
-      this.database.ref().set({
-        p1: {
-          name: '',
-          wins: 0,
-          losses: 0,
-          choice: ''
-        },
-        p2: {
-          name: '',
-          wins: 0,
-          losses: 0,
-          choice: ''
-        }
-      });
   },
   initializeDataElements: function() {
     // if firebaseInUse is true, get from Firebase, else get from localStorage
@@ -374,6 +359,27 @@ const clickHandler = (e) => {
   }
 }
 
+function closingCode() {
+  console.log('im running closing code!');
+  // resets DB when last player leaves
+  // TODO: add logic to test if it is the last player leaving
+  dbInterface.database.ref().set({
+   p1: {
+     name: '',
+     wins: 0,
+     losses: 0,
+     choice: ''
+   },
+   p2: {
+     name: '',
+     wins: 0,
+     losses: 0,
+     choice: ''
+   }
+ });
+  return null;
+}
+
 const initializeGlobals = () => {
   // initializes global variables
   console.log('in initializeGlobals');
@@ -417,3 +423,6 @@ $(document).ready(function() {
   initializeDisplay();
   main();
 });
+
+window.onunload = closingCode;
+
