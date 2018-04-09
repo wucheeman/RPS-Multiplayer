@@ -36,22 +36,21 @@ const dbInterface = {
     };
     firebase.initializeApp(config);
     this.database = firebase.database();
-    // zeros data in DB
-    // TODO: not DRY, but calling external method breaks game, so leaving for now
-    this.database.ref().set({
-      p1: {
-        name: '',
-        wins: 0,
-        losses: 0,
-        choice: ''
-      },
-      p2: {
-        name: '',
-        wins: 0,
-        losses: 0,
-        choice: ''
-      }
-    });
+      // zero data in DB
+      this.database.ref().set({
+        p1: {
+          name: '',
+          wins: 0,
+          losses: 0,
+          choice: ''
+        },
+        p2: {
+          name: '',
+          wins: 0,
+          losses: 0,
+          choice: ''
+        }
+      });
   },
   initializeDataElements: function() {
     // if firebaseInUse is true, get from Firebase, else get from localStorage
@@ -117,7 +116,6 @@ const managePlayers = {
       setTimeout(() => {
           render(makeNameInputForm(), '#nameLand', 'empty');
         }, 2000);
-      // TODO fix this!
       message = makeInitialPlayerControls(this.playerTwoName, 'p2', rps.p2Wins, rps.p2Losses);
       render(message, '#second_player_info', 'empty');
       console.log('playerTwoName is: ' + this.playerTwoName);
@@ -152,7 +150,6 @@ const managePlayers = {
   }
 }
 
-// TODO
 const rps = {
   // provides functionality for play of the game
   wins: [0, 0],
@@ -167,7 +164,6 @@ const rps = {
   p2Choice: '',
   p2Wins: 0,
   p2Losses: 0,
-  // TODO: many of these methods can probably be deleted 
   initializeP1Data: function() {
     dbInterface.zeroPlayerData('p1');
   },
@@ -223,26 +219,6 @@ const rps = {
   getTieGames: function() {
     return this.tieGames;
   },
-  // TODO delete?
-  sendPlayerChoice: function(choice) {
-    // sends player's choice to DB
-    console.log('in sendPlayerChoice');
-    // TODO: build this
-  },
-
-  // TODO: this is broken, or will be soon
-  // DELETE instead?
-  // retrievePlayerChoice: function(player) {
-  //   // gets other player's choice from the DB
-  //   // TODO: current dummy functionality
-  //   if (player === 'p1') {
-  //     // return this.p1Choice;
-  //     const testVar = dbInterface.initializeDataElements('p1Choice');
-  //     console.log('retrieved p1s choice from DB: ' + testVar);  
-  //   } else {
-  //     return this.p2Choice;
-  //   }
-  // },
   playRound: function() {
     // drives play of a round of RPS
     // triggered by second player making a choice
@@ -296,7 +272,8 @@ const rps = {
     render(message, '#outcome_info', 'empty');
     // TODO: RESUME 2
     // setTimeout needs to use rps.restartPlay as callback
-    setTimeout(() => { }, 2000);
+    setTimeout(() => {
+      rps.restartPlay() }, 2000);
     rps.updateCounters();
     console.log('back from updateCounters');
   },  
@@ -306,8 +283,9 @@ const rps = {
     winner = '';
     let message = emptyAnnouncementArea();
     render(message, '#outcome_info', 'empty'); 
-    // TODO: RESUME 1: 
-    // shows the first player's controls
+    message = makePlayerControls(rps.p1Name, 'p1', rps.p1Wins, rps.p1Losses);
+    console.log(message);
+    render(message, '#first_player_info', 'empty');
   },
   updateCounters: function() {
     let message = makeInitialPlayerControls(rps.p1Name, 'p1', rps.p1Wins, rps.p1Losses);
@@ -331,9 +309,6 @@ const rps = {
      );
     render(message, '#second_player_info', 'empty');
   }
-
-  // TODO: continue adding methods as needed
-
 } // end of rps definition
 
 // GLOBAL FUNCTIONS
@@ -400,12 +375,13 @@ const clickHandler = (e) => {
 }
 
 const initializeGlobals = () => {
-  // initializes global variables... if any
+  // initializes global variables
   console.log('in initializeGlobals');
+  winner = '';
+  // forces DB initialization when app starts up for first time
   dbInterface.initializeDB();
   dbInterface.initializeDataElements();
   rps.initializeGameData();
-  winner = '';
 }
 
 const initializeDisplay = () => {
