@@ -4,11 +4,20 @@
 const announceResults = (playerName) => {
   // builds announcement in central region of game
   // TODO: (future) improve HTML/CSS
-  const message = `
-    <br>
-    <h3 class="text-center">${playerName} Wins!!!</h3>
-    <h4 class="text-center">Let's Go For Another Round!</h4>
-  `
+  let message;
+  if (playerName === 'tie') {
+    message = `
+      <br>
+      <h3 class="text-center">It's a Tie!!!</h3>
+      <h4 class="text-center">Let's Go For Another Round!</h4>
+    `
+  } else {
+    message = `
+      <br>
+      <h3 class="text-center">${playerName} Wins!!!</h3>
+      <h4 class="text-center">Let's Go For Another Round!</h4>
+    `
+  }
   return message;
 }
 

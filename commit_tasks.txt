@@ -20,7 +20,7 @@
 [x] Game updates db for player one's name on entry
 [x] Game updates dB for each player's choice
 [x] Game updates db with name when player two enters
-[-]  screen updates to indicate second player can enter choice
+[x]  screen updates to indicate second player can enter choice
    (x) player's screen displays choices
    [x] Fix bug; player 1 win/loss info is undefined when controls are first popped up
    (x) player one's screen controls removed
@@ -36,8 +36,8 @@
 [x] Players win/loss display updates after each round
 [x] Game resets automatically for the next round after 2 seconds
 [] Fix bug: game resets when second player joins on separate page
-[] Fix bug: second player name does not appear in win announcments
-[] Fix bug: game should announce tie correctly
+[x] Fix bug: second player name does not appear in win announcments
+[x] Fix bug: game should announce tie correctly
 
 
 [] Game supports chat between the two players

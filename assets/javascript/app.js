@@ -137,8 +137,6 @@ const managePlayers = {
 
 const rps = {
   // provides functionality for play of the game
-  wins: [0, 0],
-  losses: [0, 0],
   tieGames: 0,
   choices: ['rock', 'paper', 'scissors'],
   p1Name: '',
@@ -190,20 +188,6 @@ const rps = {
   incrementTies: function() {
     this.tieGames++;
   },
-  getPlayerWins: function(player) {
-    // gets player's wins
-    if (player === 'p1') {
-      return this.p1Wins;
-    } else {
-      return this.p2Wins;
-    }
-  },
-  getPlayerLosses: function(player) {
-    // TODO get player's losses
-  },
-  getTieGames: function() {
-    return this.tieGames;
-  },
   playRound: function() {
     // drives play of a round of RPS
     // triggered by second player making a choice
@@ -214,30 +198,36 @@ const rps = {
         this.incrementPlayerLosses('p2');
     } else if ((rps.p1Choice === "rock") && (rps.p2Choice === "paper")) {
         console.log('p2 wins!');
+        winner = rps.p2Name;
         this.incrementPlayerWins('p2');
         this.incrementPlayerLosses('p1');
 
     } else if ((rps.p1Choice === "scissors") && (rps.p2Choice === "rock")) {
         console.log('p2 wins!');
+        winner = rps.p2Name;
         this.incrementPlayerWins('p2');
         this.incrementPlayerLosses('p1');
     } else if ((rps.p1Choice === "scissors") && (rps.p2Choice === "paper")) {
         console.log('p1 wins!');
+        winner = rps.p1Name;
         this.incrementPlayerWins('p1');
         this.incrementPlayerLosses('p2');
 
     } else if ((rps.p1Choice === "paper") && (rps.p2Choice === "rock")) {
         console.log('p1 wins!');
+        winner = rps.p1Name;
         this.incrementPlayerWins('p1');
         this.incrementPlayerLosses('p2');
     } else if ((rps.p1Choice === "paper") && (rps.p2Choice === "scissors")) {
         console.log('p2 wins!');
+        winner = rps.p2Name;
         this.incrementPlayerWins('p2');
         this.incrementPlayerLosses('p1');
 
     } else if (rps.p1Choice === rps.p2Choice) {
         console.log('it is a tie!');
         this.incrementTies();
+        winner = 'tie';
     } else {
       console.log('something went badly wrong in rps.PlayRound');
     }
