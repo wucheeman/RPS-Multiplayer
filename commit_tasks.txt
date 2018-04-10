@@ -40,8 +40,16 @@
 [x] Fix bug: game should announce tie correctly
 [x] Fix bug: name entry form appears when there are two players already
 [x] Fix bug; game accepts empty string as player name
-
 [x] Game supports chat between the two players. Chat need not be persisted
+
+WHEN WORK RESUMES
+[] Game works correctly when two browser pages are open.
+   () Player 1's name shows correctly in player 2's window and vice versa
+   () Player's controls appear only in that player's window when it is that player's turn
+   () Announcements of outcome and turn appear in both windows
+   () Player choice appears in that player's window as shown in target
+   () Once submitted, chat message appears in both players' windows
+
 [] Player leaves by reloading page
 SEE MATERIAL on presence - exercises 07/15 and /16
 [] Game notifies other player via 'disconnect' message in chat
