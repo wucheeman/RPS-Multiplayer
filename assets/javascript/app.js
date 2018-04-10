@@ -2,12 +2,6 @@
 
 // GLOBAL VARIABLES
 //===============================================================
-const dataElement = {
-  // not sure this makes sense here
-  key: '',
-  value: ''
-}
-
 let winner;
 
 // GLOBAL OBJECTS
@@ -15,12 +9,17 @@ let winner;
 
 // TODO
 const chatInterface = {
-  // provides functionality for the chat interface
+  message: '',
+  sendChatMessage: function(newMessage) {
+    console.log('got message: ' + newMessage);
+    dbInterface.storeChatMessage(newMessage);
+    messageForRender = makeChatMessageForDisplay(this.message);
+    render(messageForRender, ".chatLand");
+  }
 }
 
 const dbInterface = {
-  // provides single interface to Firebase and localStorage
-  // currently only supports Firebase
+  // provides single interface to Firebase
   firebaseInUse: true,
   database: '',
   initializeDB: function () {
@@ -38,7 +37,6 @@ const dbInterface = {
     this.database = firebase.database();
   },
   initializeDataElements: function() {
-    // if firebaseInUse is true, get from Firebase, else get from localStorage
     console.log('in dbInterface.initializeDataElements()');
     // this retrieves data initially and whenever it changes
     this.database.ref().on("value", function(snapshot) {
@@ -50,17 +48,21 @@ const dbInterface = {
     rps.p2Choice = snapshot.val().p2.choice;
     rps.p2Wins = snapshot.val().p2.wins;
     rps.p2Losses = snapshot.val().p2.losses;
+    chatInterface.message = snapshot.val().message.currentMsg;
     }, function(errorObject) {
       console.log("The read failed: " + errorObject.code);
     });
   },
   setDataElement: function(player, key, value) {
-    // if firebaseInUse is true, write data to Firebase else write to localStorage
+    // writes individual data elements to Firebase
     console.log('in dbInterface.setDataElement()');
     console.log(player, key, value);
     // NOTE the [] around the 'key' variable!
     this.database.ref().child(player).update({[key]: value});
     console.log('set a value in the DB');
+  },
+  storeChatMessage: function (newMessage) {
+    this.database.ref().child('message').update({currentMsg: newMessage});
   },
   zeroPlayerData: function(player) {
     console.log('in zeroPlayerData');
@@ -342,10 +344,14 @@ const clickHandler = (e) => {
       dbInterface.setDataElement('p2', 'choice', 'scissors');
       rps.playRound();
       break;
-    // case <value n> :
-    //     code to be executed if <variable> has <value n>
-    //     break;
-    // //...
+    case "btn.btn-square btn-success ml-2 send_msg":
+      e.defaultPrevented;
+      console.log('clicked on send button');
+      let message = $('#chat_message').val().trim();
+      chatInterface.sendChatMessage(message);
+      // TODO move to render
+      $("#chat_message").val('');
+      break;
     default:
       console.log('user clicked in unsupported region');
   }
@@ -367,8 +373,11 @@ function closingCode() {
      wins: 0,
      losses: 0,
      choice: ''
+   },
+   message: {
+     currentMsg: ''
    }
- });
+  });
   return null;
 }
 
@@ -382,6 +391,7 @@ const initializeGlobals = () => {
   rps.initializeGameData();
 }
 
+// TODO: delete if unused
 const initializeDisplay = () => {
   // initializes display ... if needed
   console.log('in initializeDisplay');
@@ -420,6 +430,7 @@ const validateNameInput = (newPlayer) => {
 $(document).ready(function() {
   console.log('starting app.js');
   initializeGlobals();
+  // TODO: delete if unused
   initializeDisplay();
   main();
 });

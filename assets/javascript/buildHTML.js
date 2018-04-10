@@ -34,6 +34,11 @@ const emptyAnnouncementArea = () => {
   return message;
 }
 
+const makeChatMessageForDisplay = (chatMessage) => {
+  console.log('in makeChatMessageForDisplay');
+  return`<p class="pb-0 mb-0">${chatMessage}</p>`;
+}
+
 const makeNameInputForm = () => {
   const message = `
     <div class="input-group mb-3">

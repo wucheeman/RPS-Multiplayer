@@ -41,8 +41,7 @@
 [x] Fix bug: name entry form appears when there are two players already
 [x] Fix bug; game accepts empty string as player name
 
-[] Game supports chat between the two players
-[] Chat need not be persisted
+[x] Game supports chat between the two players. Chat need not be persisted
 [] Player leaves by reloading page
 SEE MATERIAL on presence - exercises 07/15 and /16
 [] Game notifies other player via 'disconnect' message in chat
