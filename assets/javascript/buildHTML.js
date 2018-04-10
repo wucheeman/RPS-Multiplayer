@@ -22,7 +22,7 @@ const announceResults = (playerName) => {
 }
 
 const indicateTurn = (playerName) => {
-  console.log("in indicateTurn()");
+  //console.log("in indicateTurn()");
   const message = `
       <h3>It's ${playerName}'s turn!</h3>
   `
@@ -35,7 +35,7 @@ const emptyAnnouncementArea = () => {
 }
 
 const makeChatMessageForDisplay = (chatMessage) => {
-  console.log('in makeChatMessageForDisplay');
+  //console.log('in makeChatMessageForDisplay');
   return`<p class="pb-0 mb-0">${chatMessage}</p>`;
 }
 
@@ -53,7 +53,7 @@ const makeNameInputForm = () => {
 
 const makePlayerControls = (playerName, playerID, playerWins, playerLosses) => {
   // builds and won/loss display for a player
-  console.log('in buildHTmL makePlayerControls')
+  //console.log('in buildHTmL makePlayerControls')
   const message = `
     <h4> ${playerName} </h4>
     <hr>
@@ -69,7 +69,7 @@ const makePlayerControls = (playerName, playerID, playerWins, playerLosses) => {
 // TODO (future): make this DRY
 const makeInitialPlayerControls = (playerName, playerID, playerWins, playerLosses) => {
   // builds initial control-area display for a player
-  console.log('in buildHTmL makeInitialPlayerControls')
+  //console.log('in buildHTmL makeInitialPlayerControls')
   const message = `
     <h4> ${playerName} </h4>
     <hr>
@@ -84,7 +84,7 @@ const makeInitialPlayerControls = (playerName, playerID, playerWins, playerLosse
 
 const welcomePlayer = (playerName, playerID) => {
   // builds welcome display for a player
-  console.log('in buildHTmL welcomePlayer')
+  //console.log('in buildHTmL welcomePlayer')
   let message = '';
   let num;
   if (playerID === 'p1') {
