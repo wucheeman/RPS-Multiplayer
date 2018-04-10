@@ -255,6 +255,9 @@ const rps = {
     message = makePlayerControls(rps.p1Name, 'p1', rps.p1Wins, rps.p1Losses);
     console.log(message);
     render(message, '#first_player_info', 'empty');
+    message = indicateTurn(rps.p1Name);
+    console.log(message);
+    render(message, '#nameLand', 'empty');
   },
   updateCounters: function() {
     let message = makeInitialPlayerControls(rps.p1Name, 'p1', rps.p1Wins, rps.p1Losses);
@@ -307,7 +310,7 @@ const clickHandler = (e) => {
         }, 1500);
       }
       break;
-    // TODO: refactor to be more DRY? It's really wet!!!
+    // TODO: refactor to be more DRY. It's really wet!!!
     case 'rock p1' :
       console.log('p1 chose rock');
       dbInterface.setDataElement('p1', 'choice', 'rock');
@@ -315,6 +318,9 @@ const clickHandler = (e) => {
       message = makeInitialPlayerControls(rps.p1Name, 'p1', rps.p1Wins, rps.p1Losses);
       render(message, '#first_player_info', 'empty');
       rps.showPlayerTwoControls();
+      message = indicateTurn(rps.p2Name);
+      console.log(message);
+      render(message, '#nameLand', 'empty');
       break;
     case 'paper p1':
       console.log('p1 chose paper');
@@ -322,6 +328,9 @@ const clickHandler = (e) => {
       message = makeInitialPlayerControls(rps.p1Name, 'p1', rps.p1Wins, rps.p1Losses);
       render(message, '#first_player_info', 'empty');
       rps.showPlayerTwoControls();
+      message = indicateTurn(rps.p2Name);
+      console.log(message);
+      render(message, '#nameLand', 'empty');
       break;
     case 'scissors p1':
       console.log('p1 chose scissors');
@@ -329,6 +338,9 @@ const clickHandler = (e) => {
       message = makeInitialPlayerControls(rps.p1Name, 'p1', rps.p1Wins, rps.p1Losses);
       render(message, '#first_player_info', 'empty');
       rps.showPlayerTwoControls();
+      message = indicateTurn(rps.p2Name);
+      console.log(message);
+      render(message, '#nameLand', 'empty');
       break;
     case 'rock p2' :
       console.log('p2 chose rock');
