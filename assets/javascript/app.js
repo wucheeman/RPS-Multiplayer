@@ -286,6 +286,7 @@ const rps = {
 const clickHandler = (e) => {
   console.log('in clickHandler');
   const clickTarget = e.target.className;
+  let message;
   switch (clickTarget) {
     case 'btn.btn-square btn-success ml-2 addPlayer':
       console.log('clicked on start button');
@@ -347,7 +348,7 @@ const clickHandler = (e) => {
     case "btn.btn-square btn-success ml-2 send_msg":
       e.defaultPrevented;
       console.log('clicked on send button');
-      let message = $('#chat_message').val().trim();
+      message = $('#chat_message').val().trim();
       chatInterface.sendChatMessage(message);
       // TODO move to render
       $("#chat_message").val('');
